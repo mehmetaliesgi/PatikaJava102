@@ -1,4 +1,4 @@
-package Dependency;
+package DependencyComposition;
 
 public class Student {
     private String name;
@@ -27,7 +27,7 @@ public class Student {
     }
 
     public String getSurname() {
-        return surname;
+        return this.surname;
     }
 
     public void setSurname(String surname) {
@@ -35,7 +35,7 @@ public class Student {
     }
 
     public String getIdno() {
-        return idno;
+        return this.idno;
     }
 
     public void setIdno(String idno) {
@@ -43,7 +43,7 @@ public class Student {
     }
 
     public String getAddress() {
-        return address;
+        return this.address;
     }
 
     public void setAddress(String address) {
@@ -51,7 +51,7 @@ public class Student {
     }
 
     public int getNote() {
-        return note;
+        return this.note;
     }
 
     public void setNote(int note) {

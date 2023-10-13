@@ -1,12 +1,14 @@
-package Dependency;
+package DependencyComposition;
 
 public class Course {
     private String courseName;
     private String code;
+    private Instructor instructor;
 
-    public Course(String courseName, String code) {
+    public Course(String courseName, String code, Instructor instructor) {
         this.courseName = courseName;
         this.code = code;
+        this.instructor = instructor;
     }
 
     public String getCourseName() {
@@ -31,5 +33,13 @@ public class Course {
             avarage += student.getNote();
         }
         return avarage /students.length;
+    }
+
+    public Instructor getInstructor() {
+        return this.instructor;
+    }
+
+    public void setInstructor(Instructor instructor) {
+        this.instructor = instructor;
     }
 }

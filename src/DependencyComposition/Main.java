@@ -1,4 +1,4 @@
-package Dependency;
+package DependencyComposition;
 
 public class Main {
     public static void main(String[] args) {
@@ -7,7 +7,10 @@ public class Main {
         Student student3 = new Student("Patika", "Dev", "125", "Address Patika", 111);
         student3.setNote(100);
 
-        Course mat = new Course("Matematik", "MAT-101");
+        Instructor instructor = new Instructor("Ali", "Kemal", "CENG");
+
+        Course mat = new Course("Matematik", "MAT-101", instructor);
+        System.out.println(mat.getInstructor().getName());
         Student[] students = {student1, student2, student3};
         System.out.println("Ortalama: " + mat.calculateAvarage(students));
     }
