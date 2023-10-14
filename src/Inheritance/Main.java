@@ -2,11 +2,11 @@ package Inheritance;
 
 public class Main {
     public static void main(String[] args) {
-        Calisan calisan1 = new Calisan("Ali Cabbar", "05322211341", "info@alicabbar.net");
-        Akademisyen akademisyen1 = new Akademisyen("Halis Aga", "5411244223", "info@halis.net", "CENG", "Profesor");
-        //akademisyen1.derseGir();
-        Memur memur1 = new Memur("Mahmut Mamut", "5421134214", "info@mahmutmamut.net", "Bilgi İşlem", "09:00 - 18:00");
-        //memur1.calis();
+        Calisan calisan = new Calisan("Ali Cabbar", "05322211341", "info@alicabbar.net");
+        Akademisyen akademisyen = new Akademisyen("Halis Aga", "5411244223", "info@halis.net", "CENG", "Profesor");
+        //akademisyen.derseGir();
+        Memur memur = new Memur("Mahmut Mamut", "5421134214", "info@mahmutmamut.net", "Bilgi İşlem", "09:00 - 18:00");
+        //memur.calis();
         OgretimGorevlisi ogretimGorevlisi = new OgretimGorevlisi("Ahmet Hoca", "5123144213", "info@ahmet.net", "CENG", "YarDoc", "12");
         //ogretimGorevlisi.giris();
         //ogretimGorevlisi.derseGir();
@@ -22,5 +22,13 @@ public class Main {
         //labAsistani.derseGir();
         //labAsistani.yemekhane();
         //labAsistani.cikis();
+
+        //ogretimGorevlisi.giris();
+        //akademisyen.giris();
+        //calisan.giris();
+        //memur.giris();
+
+        Calisan[] loginUsers = {calisan, akademisyen, memur, ogretimGorevlisi, guvenlikGorevlisi, labAsistani};
+        Calisan.girisYapanlar(loginUsers);
     }
 }

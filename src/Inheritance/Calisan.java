@@ -47,4 +47,9 @@ public class Calisan {
         System.out.println(this.adSoyad + " yemekhaneye giriş yaptı!!");
     }
 
+    public static void girisYapanlar(Calisan[] loginUsers) {
+        for (Calisan c : loginUsers) {
+            c.giris();
+        }
+    }
 }

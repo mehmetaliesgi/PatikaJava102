@@ -16,4 +16,9 @@ public class OgretimGorevlisi extends Akademisyen {
     public void setKapiNo(String kapiNo) {
         this.kapiNo = kapiNo;
     }
+
+    @Override
+    public void giris() {
+        System.out.println(this.getAdSoyad() + " öğretim görevlisi B kapısından giriş yaptı.");
+    }
 }

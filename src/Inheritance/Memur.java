@@ -29,4 +29,9 @@ public class Memur extends Calisan{
     public void calis() {
         System.out.println(this.getAdSoyad() + " memur görevlisi çalışıyor.");
     }
+
+    @Override
+    public void giris() {
+        System.out.println(this.getAdSoyad() + " çalışanı C kapısından giriş yaptı.");
+    }
 }
