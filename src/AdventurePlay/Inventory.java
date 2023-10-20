@@ -8,7 +8,7 @@ public class Inventory {
     private Armor armor;
 
     public Inventory() {
-        this.weapon = new Weapon("Yumruk", 0, 0, 0);
+        this.weapon = new Weapon("Yumruk", -1, 0, 0);
         this.armor = new Armor(0, "Pijama", 0,0);
     }
 

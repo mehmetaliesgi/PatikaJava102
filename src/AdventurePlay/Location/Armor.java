@@ -3,20 +3,20 @@ package AdventurePlay.Location;
 public class Armor {
     private int id;
     private String armorName;
-    private int armorDefence;
+    private int block;
     private int armorPrice;
-    public Armor(int id, String armorName, int armorDefence, int armorPrice) {
+    public Armor(int id, String armorName, int block, int armorPrice) {
         this.id = id;
         this.armorName = armorName;
-        this.armorDefence = armorDefence;
+        this.block = block;
         this.armorPrice = armorPrice;
     }
 
     public static Armor[] armors() {
        Armor[] armorlist = new Armor[3];
-       armorlist[0] = new Armor(1,"Zırh 1", 10, 10);
-       armorlist[1] = new Armor(2,"Zırh 2", 15, 15);
-       armorlist[2] = new Armor(3,"Zırh 3", 20, 20);
+       armorlist[0] = new Armor(1,"Hafif", 2, 10);
+       armorlist[1] = new Armor(2,"Orta", 5, 30);
+       armorlist[2] = new Armor(3,"Ağır", 10, 40);
        return armorlist;
     }
 
@@ -44,12 +44,12 @@ public class Armor {
         this.armorName = armorName;
     }
 
-    public int getArmorDefence() {
-        return armorDefence;
+    public int getBlock() {
+        return block;
     }
 
-    public void setArmorDefence(int armorDefence) {
-        this.armorDefence = armorDefence;
+    public void setBlock(int armorDefence) {
+        this.block = armorDefence;
     }
 
     public int getArmorPrice() {

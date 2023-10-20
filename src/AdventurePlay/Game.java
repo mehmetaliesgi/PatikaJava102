@@ -1,9 +1,5 @@
 package AdventurePlay;
 
-import AdventurePlay.GameCharacter.Archer;
-import AdventurePlay.GameCharacter.GameCharacter;
-import AdventurePlay.GameCharacter.Knight;
-import AdventurePlay.GameCharacter.Samurai;
 import AdventurePlay.Location.Location;
 import AdventurePlay.Location.SafeHouse;
 import AdventurePlay.Location.ToolStore;
@@ -33,10 +29,14 @@ public class Game {
             for (Location map : gameMaps) {
                 System.out.println(map.getId() + " - " + map.getName() +  " --> " + map.getDescription());
             }
+            System.out.println("0 - Çıkış Yap --> Oyunu sonlandır.");
             System.out.print("Lütfen gitmek istediğiniz bölgeyi seçiniz : ");
             int selectLoc = scanner.nextInt();
 
             switch (selectLoc) {
+                case 0:
+                    location = null;
+                    break;
                 case 1:
                     location = new SafeHouse(player);
                     break;
@@ -47,6 +47,10 @@ public class Game {
                     location = new SafeHouse(player);
             }
 
+            if (location == null) {
+                System.out.println("Oyun bitti. Görüşmek üzere!");
+                break;
+            }
             if(!location.onLocation())
             {
                 System.out.println("GAME OVER");
