@@ -1,4 +1,4 @@
-package AdventurePlay;
+package AdventurePlay.GameCharacter;
 
 public abstract class GameCharacter {
     private int id;

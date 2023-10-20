@@ -1,4 +1,6 @@
-package AdventurePlay;
+package AdventurePlay.GameCharacter;
+
+import AdventurePlay.GameCharacter.GameCharacter;
 
 public class Samurai extends GameCharacter {
     public Samurai() {

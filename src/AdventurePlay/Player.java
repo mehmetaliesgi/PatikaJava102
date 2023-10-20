@@ -1,5 +1,10 @@
 package AdventurePlay;
 
+import AdventurePlay.GameCharacter.Archer;
+import AdventurePlay.GameCharacter.GameCharacter;
+import AdventurePlay.GameCharacter.Knight;
+import AdventurePlay.GameCharacter.Samurai;
+
 import java.util.Scanner;
 
 public class Player {
@@ -7,14 +12,13 @@ public class Player {
     private int damage;
     private int health;
     private int money;
-    private String charName;
     private String name;
-    private GameCharacter gameCharacter;
-
     private Scanner input = new Scanner(System.in);
+    private Inventory inventory;
 
     public Player(String name) {
         this.name = name;
+        this.inventory = new Inventory();
     }
 
     public void selectChar() {
@@ -45,21 +49,30 @@ public class Player {
                 initPlayer(new Samurai());
                 break;
         }
+        /*
         System.out.println("Karakter: " + this.getName());
         System.out.println("Hasar\t: " + this.getDamage());
         System.out.println("Sağlık\t: " + this.getHealth());
         System.out.println("Para\t: " + this.getMoney());
         System.out.println("--------------------------------------------------------------------------------");
+         */
     }
-
     public void initPlayer(GameCharacter gameCharacter) {
         this.setDamage(gameCharacter.getDamage());
         this.setHealth(gameCharacter.getHealth());
         this.setMoney(gameCharacter.getMoney());
         this.setName(gameCharacter.getName());
     }
+
+    public void printPlayerInfo() {
+        System.out.println("Silahınız: " + this.getInventory().getWeapon().getName() +
+                ",\tHasarınız: " + this.getDamage() +
+                ",\tSağlık: " + this.getHealth() +
+                ",\tPara: " + this.getMoney());
+    }
+
     public int getDamage() {
-        return damage;
+        return damage + this.getInventory().getWeapon().getDamage();
     }
 
     public void setDamage(int damage) {
@@ -67,7 +80,7 @@ public class Player {
     }
 
     public int getHealth() {
-        return health;
+        return health + this.getInventory().getArmor().getArmorDefence();
     }
 
     public void setHealth(int health) {
@@ -82,19 +95,19 @@ public class Player {
         this.money = money;
     }
 
-    public String getCharName() {
-        return charName;
-    }
-
-    public void setCharName(String charName) {
-        this.charName = charName;
-    }
-
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Inventory getInventory() {
+        return inventory;
+    }
+
+    public void setInventory(Inventory inventory) {
+        this.inventory = inventory;
     }
 }
