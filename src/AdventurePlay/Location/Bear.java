@@ -1,0 +1,7 @@
+package AdventurePlay.Location;
+
+public class Bear extends Monster{
+    public Bear() {
+        super("Bear", 3, 7, 20);
+    }
+}

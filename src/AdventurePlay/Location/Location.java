@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public abstract class Location {
     private Player player;
-    private String name, description;
+    private String name, description, award;
     private int id;
     public static Scanner scanner = new Scanner(System.in);
     public Location(Player player, String name, int id, String description) {
@@ -48,5 +48,13 @@ public abstract class Location {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getAward() {
+        return award;
+    }
+
+    public void setAward(String award) {
+        this.award = award;
     }
 }

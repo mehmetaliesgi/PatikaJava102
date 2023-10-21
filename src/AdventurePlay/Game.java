@@ -1,8 +1,6 @@
 package AdventurePlay;
 
-import AdventurePlay.Location.Location;
-import AdventurePlay.Location.SafeHouse;
-import AdventurePlay.Location.ToolStore;
+import AdventurePlay.Location.*;
 
 import java.util.Scanner;
 
@@ -20,14 +18,19 @@ public class Game {
         player.selectChar();
 
         Location location = null;
-        Location[] gameMaps = {new SafeHouse(player), new ToolStore(player)};
+        Location[] gameMaps = {new SafeHouse(player), new ToolStore(player), new Cave(player), new Forest(player), new River(player)};
         while (true) {
             player.printPlayerInfo();
             System.out.println();
             System.out.println("################## Bölgeler ################## ");
             System.out.println();
             for (Location map : gameMaps) {
-                System.out.println(map.getId() + " - " + map.getName() +  " --> " + map.getDescription());
+                if (map.getId() > 2) {
+                    System.out.println(map.getId() + " - " + map.getName() +  " --> " + map.getDescription() + " Ödül --> " + map.getAward().toUpperCase());
+                }
+                else {
+                    System.out.println(map.getId() + " - " + map.getName() +  " --> " + map.getDescription());
+                }
             }
             System.out.println("0 - Çıkış Yap --> Oyunu sonlandır.");
             System.out.print("Lütfen gitmek istediğiniz bölgeyi seçiniz : ");
@@ -43,8 +46,17 @@ public class Game {
                 case 2:
                     location = new ToolStore(player);
                     break;
+                case 3:
+                    location = new Cave(player);
+                    break;
+                case 4:
+                    location = new Forest(player);
+                    break;
+                case 5:
+                    location = new River(player);
+                    break;
                 default:
-                    location = new SafeHouse(player);
+                    System.out.println("Lütfen geçerli bir bölge giriniz.");
             }
 
             if (location == null) {
