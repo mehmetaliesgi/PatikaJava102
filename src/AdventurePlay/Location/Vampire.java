@@ -2,6 +2,6 @@ package AdventurePlay.Location;
 
 public class Vampire extends Monster {
     public Vampire() {
-        super("Vampire", 2, 4, 15);
+        super("Vampire", 2, 4, 15, 15, 7);
     }
 }
