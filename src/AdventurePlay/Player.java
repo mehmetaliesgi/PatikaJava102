@@ -11,6 +11,7 @@ public class Player {
 
     private int damage;
     private int health;
+    private int orjinalHealth;
     private int money;
     private String name;
     private Scanner input = new Scanner(System.in);
@@ -22,7 +23,7 @@ public class Player {
     }
 
     public void selectChar() {
-
+        System.out.println("Karakterler");
         GameCharacter[] gameCharacters = {new Samurai(), new Archer(), new Knight()};
         System.out.println("--------------------------------------------------------------------------------");
         for (GameCharacter gameCharacter : gameCharacters) {
@@ -62,6 +63,7 @@ public class Player {
         this.setHealth(gameCharacter.getHealth());
         this.setMoney(gameCharacter.getMoney());
         this.setName(gameCharacter.getName());
+        this.setOrjinalHealth(gameCharacter.getHealth());
     }
 
     public void printPlayerInfo() {
@@ -112,5 +114,13 @@ public class Player {
 
     public void setInventory(Inventory inventory) {
         this.inventory = inventory;
+    }
+
+    public int getOrjinalHealth() {
+        return orjinalHealth;
+    }
+
+    public void setOrjinalHealth(int orjinalHealth) {
+        this.orjinalHealth = orjinalHealth;
     }
 }

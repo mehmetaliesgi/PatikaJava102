@@ -15,12 +15,14 @@ public class Game {
         Player player = new Player(playerName);
         System.out.println("Sayın " + player.getName() + " Hoşgeldiniz!!");
         System.out.println("Lütfen oyuna başlamak için bir karakter seçiniz: ");
+        System.out.println("--------------------------------------------------------------------------------");
         player.selectChar();
 
         Location location = null;
         Location[] gameMaps = {new SafeHouse(player), new ToolStore(player), new Cave(player), new Forest(player), new River(player)};
         while (true) {
             player.printPlayerInfo();
+            System.out.println("--------------------------------------------------------------------------------");
             System.out.println();
             System.out.println("################## Bölgeler ################## ");
             System.out.println();
@@ -33,6 +35,7 @@ public class Game {
                 }
             }
             System.out.println("0 - Çıkış Yap --> Oyunu sonlandır.");
+            System.out.println("--------------------------------------------------------------------------------");
             System.out.print("Lütfen gitmek istediğiniz bölgeyi seçiniz : ");
             int selectLoc = scanner.nextInt();
 
@@ -68,6 +71,7 @@ public class Game {
                 System.out.println("GAME OVER");
                 break;
             }
+            System.out.println("--------------------------------------------------------------------------------");
         }
 
     }
