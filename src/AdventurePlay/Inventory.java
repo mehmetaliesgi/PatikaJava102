@@ -1,7 +1,6 @@
 package AdventurePlay;
 
-import AdventurePlay.Location.Armor;
-import AdventurePlay.Location.Weapon;
+import AdventurePlay.Location.*;
 
 public class Inventory {
     private Weapon weapon;

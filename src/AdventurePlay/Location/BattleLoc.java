@@ -8,6 +8,7 @@ public abstract class BattleLoc extends Location {
     private Monster monster;
     private String award;
     private int maxMonster;
+    private Random random = new Random();
 
     public BattleLoc(Player player, String name, int id, String description, Monster monster, String award, int maxMonster) {
         super(player, name, id, description);
@@ -37,6 +38,7 @@ public abstract class BattleLoc extends Location {
 
     public boolean combat(int monsterNum) {
         for (int i = 1; i <= monsterNum; i++) {
+            int firstAttack = firstHit();
             this.getMonster().setHealth(this.getMonster().getOrjinalHealth());
             playerStats();
             monsterStats(i);
@@ -44,17 +46,34 @@ public abstract class BattleLoc extends Location {
                 System.out.println("<V>ur veya <K>aç");
                 String selectCombat = scanner.next().toUpperCase();
                 if (selectCombat.equals("V")) {
-                    System.out.println("Siz vurdunuz !");
-                    this.getMonster().setHealth(this.getMonster().getHealth() - this.getPlayer().totalDamage());
-                    afterHit();
-                    if (this.getMonster().getHealth() > 0) {
-                        System.out.println();
-                        System.out.println(this.getMonster().getName() + " size vurdu !");
-                        int monsterDamage = this.getMonster().getDamage() - this.getPlayer().getInventory().getArmor().getBlock();
-                        if (monsterDamage < 0) {
-                            monsterDamage = 0;
+                    if (firstAttack == 0) {
+                        System.out.println("Siz vurdunuz !");
+                        this.getMonster().setHealth(this.getMonster().getHealth() - this.getPlayer().totalDamage());
+                        afterHit();
+                        if (this.getMonster().getHealth() > 0) {
+                            System.out.println();
+                            System.out.println(this.getMonster().getName() + " size vurdu !");
+                            int monsterDamage = this.getMonster().getDamage() - this.getPlayer().getInventory().getArmor().getBlock();
+                            if (monsterDamage < 0) {
+                                monsterDamage = 0;
+                            }
+                            this.getPlayer().setHealth(this.getPlayer().getHealth() - monsterDamage);
+                            afterHit();
                         }
-                        this.getPlayer().setHealth(this.getPlayer().getHealth() - monsterDamage);
+                    }
+                    else {
+                        if (this.getMonster().getHealth() > 0) {
+                            System.out.println();
+                            System.out.println(this.getMonster().getName() + " size vurdu !");
+                            int monsterDamage = this.getMonster().getDamage() - this.getPlayer().getInventory().getArmor().getBlock();
+                            if (monsterDamage < 0) {
+                                monsterDamage = 0;
+                            }
+                            this.getPlayer().setHealth(this.getPlayer().getHealth() - monsterDamage);
+                            afterHit();
+                        }
+                        System.out.println("Siz vurdunuz !");
+                        this.getMonster().setHealth(this.getMonster().getHealth() - this.getPlayer().totalDamage());
                         afterHit();
                     }
                 } else {
@@ -98,8 +117,11 @@ public abstract class BattleLoc extends Location {
     }
 
     public int randomMonsterNumber() {
-        Random random = new Random();
         return random.nextInt(this.maxMonster) + 1;
+    }
+
+    public int firstHit() {
+        return random.nextInt(2);
     }
 
     public Monster getMonster() {
