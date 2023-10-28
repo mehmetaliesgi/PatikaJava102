@@ -26,7 +26,7 @@ public abstract class BattleLoc extends Location {
         String selectBattleCase = scanner.next();
         selectBattleCase = selectBattleCase.toUpperCase();
         if (selectBattleCase.equals("S") && combat(monsterNum)) {
-            System.out.println(this.getName() + " tüm düşmanları yendiniz.");
+            System.out.println(this.getName() + "'deki tüm düşmanları yendiniz.");
             return true;
         }
         if (this.getPlayer().getHealth() <= 0) {
@@ -89,7 +89,7 @@ public abstract class BattleLoc extends Location {
                 return false;
             }
         }
-        return false;
+        return true;
     }
 
     public void playerStats() {

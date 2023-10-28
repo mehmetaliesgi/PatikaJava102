@@ -1,5 +1,5 @@
 ### IntelliJ IDEA ###
-out/
-!**/src/main/**/out/
-!**/src/test/**/out/
+outNonStatic/
+!**/src/main/**/outNonStatic/
+!**/src/test/**/outNonStatic/
 .idea

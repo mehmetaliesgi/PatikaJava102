@@ -19,7 +19,7 @@ public class Game {
         player.selectChar();
 
         Location location = null;
-        Location[] gameMaps = {new SafeHouse(player), new ToolStore(player), new Cave(player), new Forest(player), new River(player)};
+        Location[] gameMaps = {new SafeHouse(player), new ToolStore(player), new Cave(player), new Forest(player), new River(player), new Mine(player)};
         while (true) {
             player.printPlayerInfo();
             System.out.println("--------------------------------------------------------------------------------");
@@ -58,10 +58,12 @@ public class Game {
                 case 5:
                     location = new River(player);
                     break;
+                case  6:
+                    location = new Mine(player);
+                    break;
                 default:
                     System.out.println("Lütfen geçerli bir bölge giriniz.");
             }
-
             if (location == null) {
                 System.out.println("Oyun bitti. Görüşmek üzere!");
                 break;
