@@ -1,0 +1,94 @@
+package GenericClasses.Odev;
+
+public class ArrayOperations <T> {
+    int capacity;
+    T[] list;
+    T[] listTemp;
+    int itemCount = 0;
+
+    public ArrayOperations() {
+        this.capacity = 10;
+        this.list = (T[]) new Object[this.capacity];
+    }
+    public ArrayOperations(int capacity) {
+        this.capacity = capacity;
+        this.list = (T[]) new Object[this.capacity];
+    }
+
+    public int size() {
+        return this.itemCount;
+    }
+
+    public int getCapacity() {
+        return this.list.length;
+    }
+
+    public void addData(T data) {
+        if (this.size() < this.capacity) {
+            list[this.itemCount] = data;
+            this.itemCount++;
+        } else {
+            this.capacity = this.capacity * 2;
+            this.updateCapacity();
+            this.addData(data);
+        }
+    }
+
+    public void updateCapacity() {
+        this.listTemp = (T[]) new Object[this.capacity];
+        for (int i = 0; i < this.list.length; i++) {
+            this.listTemp[i] = this.list[i];
+        }
+        this.list = this.listTemp;
+    }
+
+    public T get(int indexNum) {
+        if (indexNum > this.itemCount) {
+            return null;
+        }
+        else {
+            return list[indexNum];
+        }
+    }
+
+    public void remove(int indexNum) {
+        if (indexNum < 0) {
+            System.out.println("Index değeriniz eksi bir değer olamaz!!!");
+        }
+        else if ( indexNum > this.itemCount) {
+            System.out.println("Index değeriniz dizide bulunan eleman sayısını aşıyor");
+        }
+        else {
+            removeToList(indexNum);
+            System.out.println(indexNum + ". eleman silindi.");
+            this.itemCount--;
+        }
+    }
+
+    public void removeToList(int indexNum) {
+        T[] tempListArr = this.list;
+        System.out.println("Temp Lİst****************************************");
+        for (T i : tempListArr) {
+            System.out.print(i + " - ");
+        }
+        System.out.println();
+        this.list[indexNum] = null;
+        System.out.println("NEW LİST--------------------------------------------------");
+        for (T i : list) {
+            System.out.print(i + " - ");
+        }
+
+        for (int i = 0; i < tempListArr.length -1; i++) {
+            if (indexNum > i) {
+                this.list[i] = tempListArr[i];
+            } else if (indexNum == i || i > indexNum){
+                this.list[i] = tempListArr[i + 1];
+            }
+        }
+        System.out.println();
+        System.out.println("NULL SIZ LİST -------------------------------------------------");
+        for (T i : list) {
+            System.out.print(i + " - ");
+        }
+    }
+}
