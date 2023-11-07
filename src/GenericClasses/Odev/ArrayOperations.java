@@ -57,7 +57,13 @@ public class ArrayOperations <T> {
             + " Girebileceğiniz maksimum değer: " + (this.capacity - 1));
         }
         else {
-            list[indexNum] = value;
+            if (list[indexNum] == null){
+                itemCount++;
+                list[indexNum] = value;
+            }
+            else {
+                list[indexNum] = value;
+            }
            /* for (T i : list) {
                 System.out.print(i + " - ");
             }*/

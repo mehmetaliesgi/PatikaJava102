@@ -16,7 +16,9 @@ public class Main {
         System.out.println("Dizideki Eleman Sayısı : " + arr.size());
         System.out.println("Dizinin Kapasitesi : " +arr.getCapacity());
 
-        arr.set(2, 44);
+        arr.set(14, 44);
+        System.out.println("Dizideki Eleman Sayısı : " + arr.size());
+        System.out.println("Dizinin Kapasitesi : " +arr.getCapacity());
 
     }
 }
