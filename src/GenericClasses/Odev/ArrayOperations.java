@@ -51,6 +51,19 @@ public class ArrayOperations <T> {
         }
     }
 
+    public void set(int indexNum, T value) {
+        if (indexNum > this.capacity) {
+            System.out.println("Lütfen dizinin alabileceği değerler aralığında bir değer girin."
+            + " Girebileceğiniz maksimum değer: " + (this.capacity - 1));
+        }
+        else {
+            list[indexNum] = value;
+           /* for (T i : list) {
+                System.out.print(i + " - ");
+            }*/
+        }
+    }
+
     public void remove(int indexNum) {
         if (indexNum < 0) {
             System.out.println("Index değeriniz eksi bir değer olamaz!!!");
@@ -67,16 +80,17 @@ public class ArrayOperations <T> {
 
     public void removeToList(int indexNum) {
         T[] tempListArr = this.list;
-        System.out.println("Temp Lİst****************************************");
+        /*System.out.println("Temp Lİst****************************************");
         for (T i : tempListArr) {
             System.out.print(i + " - ");
         }
         System.out.println();
+        */
         this.list[indexNum] = null;
-        System.out.println("NEW LİST--------------------------------------------------");
+        /*System.out.println("NEW LİST--------------------------------------------------");
         for (T i : list) {
             System.out.print(i + " - ");
-        }
+        }*/
 
         for (int i = 0; i < tempListArr.length -1; i++) {
             if (indexNum > i) {
@@ -85,10 +99,10 @@ public class ArrayOperations <T> {
                 this.list[i] = tempListArr[i + 1];
             }
         }
-        System.out.println();
+        /*System.out.println();
         System.out.println("NULL SIZ LİST -------------------------------------------------");
         for (T i : list) {
             System.out.print(i + " - ");
-        }
+        }*/
     }
 }

@@ -12,9 +12,11 @@ public class Main {
         System.out.println("Dizinin Kapasitesi : " +arr.getCapacity());
 
         System.out.println(arr.get(1));
-        arr.remove(7);
+        //arr.remove(7);
         System.out.println("Dizideki Eleman Sayısı : " + arr.size());
         System.out.println("Dizinin Kapasitesi : " +arr.getCapacity());
+
+        arr.set(2, 44);
 
     }
 }
