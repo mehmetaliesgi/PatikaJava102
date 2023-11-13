@@ -148,9 +148,15 @@ public class ArrayOperations <T> {
     }
 
     public boolean isEmpty() {
-        boolean isEmpt = false;
-        if (size() == 0) {
-            isEmpt = true;
+        boolean isEmpt = true;
+        for (int i = 0; i < this.list.length; i++) {
+            if (this.list[i] == null) {
+                continue;
+            }
+            if (this.list[i] != null) {
+                isEmpt = false;
+                break;
+            }
         }
         return isEmpt;
     }
@@ -161,5 +167,11 @@ public class ArrayOperations <T> {
             arr[i] = this.list[i];
         }
         return arr;
+    }
+
+    public void clear() {
+        for (int i = 0; i < this.list.length; i++) {
+            this.list[i] = null;
+        }
     }
 }

@@ -33,5 +33,14 @@ public class Main {
         for (Object value : dizi) {
             System.out.print(value + " - ");
         }
+
+        arr.clear();
+        /*System.out.println();
+        Object[] dizi1 = arr.toArray();
+        for (Object value : dizi1) {
+            System.out.print(value + " - ");
+        }*/
+        System.out.println();
+        System.out.println(arr.isEmpty());
     }
 }
