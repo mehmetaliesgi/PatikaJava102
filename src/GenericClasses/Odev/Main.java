@@ -34,6 +34,7 @@ public class Main {
             System.out.print(value + " - ");
         }
 
+
         arr.clear();
         /*System.out.println();
         Object[] dizi1 = arr.toArray();
