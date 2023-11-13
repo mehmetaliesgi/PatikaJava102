@@ -23,5 +23,8 @@ public class Main {
 
         arr.toString();
         System.out.println(arr.indexOf(44));
+
+        arr.set(17, 44);
+        System.out.println(arr.lastIndexOf(44));
     }
 }

@@ -133,4 +133,17 @@ public class ArrayOperations <T> {
         }
         return -1;
     }
+
+    public int lastIndexOf(T data) {
+        int lastIndex = -1;
+        for (int i = 0; i < this.list.length; i++) {
+            if (this.list[i] == null) {
+                continue;
+            }
+            if (this.list[i].equals(data)) {
+                lastIndex = i;
+            }
+        }
+        return lastIndex;
+    }
 }
