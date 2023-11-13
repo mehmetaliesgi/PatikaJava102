@@ -154,4 +154,12 @@ public class ArrayOperations <T> {
         }
         return isEmpt;
     }
+
+    public T[] toArray() {
+        T[] arr = (T[]) new Object[this.list.length];
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = this.list[i];
+        }
+        return arr;
+    }
 }

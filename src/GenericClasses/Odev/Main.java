@@ -28,5 +28,10 @@ public class Main {
         System.out.println(arr.lastIndexOf(44));
 
         System.out.println(arr.isEmpty());
+
+        Object[] dizi = arr.toArray();
+        for (Object value : dizi) {
+            System.out.print(value + " - ");
+        }
     }
 }
