@@ -146,4 +146,12 @@ public class ArrayOperations <T> {
         }
         return lastIndex;
     }
+
+    public boolean isEmpty() {
+        boolean isEmpt = false;
+        if (size() == 0) {
+            isEmpt = true;
+        }
+        return isEmpt;
+    }
 }

@@ -26,5 +26,7 @@ public class Main {
 
         arr.set(17, 44);
         System.out.println(arr.lastIndexOf(44));
+
+        System.out.println(arr.isEmpty());
     }
 }
