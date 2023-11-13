@@ -111,4 +111,26 @@ public class ArrayOperations <T> {
             System.out.print(i + " - ");
         }*/
     }
+    public String toString() {
+        System.out.print("[");
+        for (T i : this.list) {
+            if (i != null) {
+                System.out.print(i + ", ");
+            }
+        }
+        System.out.println("]");
+        return "";
+    }
+
+    public int indexOf(T data) {
+        for (int i = 0; i < this.list.length; i++) {
+            if (this.list[i] == null) {
+                continue;
+            }
+            if (this.list[i].equals(data)){
+                return i;
+            }
+        }
+        return -1;
+    }
 }
