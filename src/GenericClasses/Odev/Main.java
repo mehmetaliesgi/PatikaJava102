@@ -35,13 +35,19 @@ public class Main {
         }
 
 
-        arr.clear();
-        /*System.out.println();
+        /*arr.clear();
+        System.out.println();
         Object[] dizi1 = arr.toArray();
         for (Object value : dizi1) {
             System.out.print(value + " - ");
-        }*/
+        }
         System.out.println();
         System.out.println(arr.isEmpty());
+        */
+        System.out.println();
+        Object[] subList = arr.sublist(2,6);
+        for (Object value : subList) {
+            System.out.print(value + " - ");
+        }
     }
 }

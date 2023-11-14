@@ -174,4 +174,19 @@ public class ArrayOperations <T> {
             this.list[i] = null;
         }
     }
+
+    public T[] sublist(int start,int finish) {
+        int subListSize = finish - start;
+        T[] subList = (T[]) new Object[subListSize + 1];
+        int s = 0;
+        for (int i = start; i <= finish; i++) {
+            subList[s] = this.list[i];
+            /*System.out.println("S değeri : " + s);
+            System.out.println("Listedeki değer : " + this.list[i]);
+            System.out.println("Sublist değeri : " + subList[s]);
+            System.out.println("--------------------------------------------");*/
+            s++;
+        }
+        return subList;
+    }
 }
