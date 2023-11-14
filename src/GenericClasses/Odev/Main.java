@@ -49,5 +49,8 @@ public class Main {
         for (Object value : subList) {
             System.out.print(value + " - ");
         }
+
+        System.out.println();
+        System.out.println(arr.isContain(4));
     }
 }

@@ -189,4 +189,18 @@ public class ArrayOperations <T> {
         }
         return subList;
     }
+
+    public boolean isContain(T data) {
+        boolean isThere = false;
+        for (int i = 0; i < this.list.length; i++) {
+            if (this.list[i] == null) {
+                continue;
+            }
+            if (this.list[i].equals(data)){
+                isThere = true;
+                break;
+            }
+        }
+        return isThere;
+    }
 }
