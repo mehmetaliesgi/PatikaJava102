@@ -15,6 +15,7 @@ Set interface'inde kullanabileceğimiz 3 adet yapı mevcuttur. Bunlar;
 - LinkedHashSet
 - TreeSet
 
+### - HashSet
 Yukarıda Set nesnesinin tanımını yapmıştık. Bu sebeple HashSet'ten başlayarak tanımlanma şekillerini inceleyelim.
 
     HashSet<WrapperClass> hashName = new HashSet<>();
@@ -76,4 +77,14 @@ döngüsü ile yaparız.
     }
 
 Yukarıdaki kod satırı cümlelerimizi daha anlamlı kılmıştır umarım.
+
+### - LinkedHashSet
+
+LinkedHashSet normal HashSet'ten farklı olarak giren değer sırası ile çıktı sırası aynıdır. Yani FIFO kuralına uyum sağlar. Yine HashSet'te olduğu gibi tekrar eden değerler bulundurmaz.
+Tanımlanması aşağıdaki gibidir;
+
+    LinkedHashSet<Integer> lSet = new LinkedHashSet<>();
+
+Tanımlanma şekli yukarıdaki gibidir ve HashSet için kullandığımız hangi hazır method var ise bu yapı içinde aynı metodları kullanabiliriz.
+
 

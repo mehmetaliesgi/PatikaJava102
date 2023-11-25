@@ -15,6 +15,7 @@ Set interface'inde kullanabileceğimiz 3 adet yapı mevcuttur. Bunlar;
 - LinkedHashSet
 - TreeSet
 
+### - HashSet
 Yukarıda Set nesnesinin tanımını yapmıştık. Bu sebeple HashSet'ten başlayarak tanımlanma şekillerini inceleyelim.
 
     HashSet<WrapperClass> hashName = new HashSet<>();
@@ -63,4 +64,27 @@ HashSet'te kullandığımız genel metodlar;
     hashCountry.clear();
 
 
-- 
+Şimdi nesnemizin içerisindeki elemanları gezme işlemini nasıl yapacağız konusuna gelelim. Bunun için Iterator sınıfından bizim hashSet'imizi tanımladığımız şekilde bir iterator nesnesi tanımlayacağız. Daha sonra bu iterator nesnesi ile hashMap nesnemizi eşitleyeeğiz ve hashSet sınıfımızda bulunan iterator() metodunu kullanacağız.
+
+    Iterator<String> itr = hashCountry.iterator();
+
+Yukarıdaki gibi tanımlamamızı yaptıktan sonra kullanacağımız iki önemli metod bulunuyor. hasNext() ve next() metodu. Çalışma mantığı olarak itr nesnesi elemanlarımızın bulunduğu hafıza biriminden önceki hafıza birimine yerleşir ve daha sonra hasNext() metodu ile kendinden sonraki
+hafıza birimi boş mu diye kontrol eder. Eğer var ise next() metodu ile oraya geçer ve elemanı yazdırır. Aynı şekilde işlemler devam eder. Ta ki son elemanın bulunduğu hafıza birimine gidip daha sonraki hafıza biriminin boş olduğunu görene kadar. Tabi bu işlemin devamlılığını ise while 
+döngüsü ile yaparız.
+
+    while(itr.hasNext()){
+        System.out.println(itr.next());
+    }
+
+Yukarıdaki kod satırı cümlelerimizi daha anlamlı kılmıştır umarım.
+
+### - LinkedHashSet
+
+LinkedHashSet normal HashSet'ten farklı olarak giren değer sırası ile çıktı sırası aynıdır. Yani FIFO kuralına uyum sağlar. Yine HashSet'te olduğu gibi tekrar eden değerler bulundurmaz.
+Tanımlanması aşağıdaki gibidir;
+
+    LinkedHashSet<Integer> lSet = new LinkedHashSet<>();
+
+Tanımlanma şekli yukarıdaki gibidir ve HashSet için kullandığımız hangi hazır method var ise bu yapı içinde aynı metodları kullanabiliriz.
+
+
