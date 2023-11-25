@@ -88,3 +88,29 @@ Tanımlanması aşağıdaki gibidir;
 Tanımlanma şekli yukarıdaki gibidir ve HashSet için kullandığımız hangi hazır method var ise bu yapı içinde aynı metodları kullanabiliriz.
 
 
+### - TreeSet
+
+Yine TreeSet içinde tekrarlanan öğeleri içermediğini söyleyebiliriz. Burada TreeSet'i diğer Set metodlarında ayıran özellik ise Comparator interface'ini implemente etmesi ve istediğimiz bir veriye göre sıralama yapabilmemize olanak sağlamasıdır.
+Tanımlanma şekli diğerleri gibi aynıdır fakat parametre olarak bir sıralama şekli alırlar. Örnek olarak koda dökeceğiz. Burada sadece tanım olarak geçelim. Yine aynı metodlara ek olarak bir kaç farklı hazır metod kullanılabilir. Araştırabilirsiniz.
+
+    TreeSet<Student> students = new TreeSet<>();
+
+Bu tanımlamada bizden bir karşılaştırma şekli istediği için hata alacaktır. Bunu önlemek için bir karşılaştırma sınıfı üretip, bu sınıftan nesne ürettikten sonra parametre olarak göndermeliyiz.
+Bu sıralama işlemini yaparken compare metodunun nasıl çalıştığını açıklayalım. Sıralama işlemini yapacak olan sınıfı tanımladık ve Comparator interface'inden implemente ettik ve compare metodunu override ettik.
+
+Burada bu metod 2 adet nesne alacak ve geri dönüş olarak integer bir değer verecektir. Eğer;
+
+ - Geri dönen değer negatif ise birinci parametre küçüktür ikinci parametre olarak işlem yapar.
+ - Geri dönen değer pozitif ise birinci parametre büyüktür ikinci parametre olarak işlem yapar.
+ - Geri dönen değer sıfır ise değerler eşittir.
+
+Buna ek olarak reversed metodunu kullanarak büyükten küçüğe veya küçükten büyüğe sıralanmış değerlerin tersi şekilde sıralanmasını sağlayabilirsiniz. 
+
+Yukarıda sadece aritmetik işlemlerden bahsettik. Peki non-aritmetik işlemler yani string değerli değerleri işleme alırsak ne yapacağız?
+Bunun için ise tanımlanmış özel compareTo metodu vardır. Yine Comparator inteface'ini implemente edeceğiz ve compare metodunu override edeceğiz. Fakat bu sefer o1 ve o2 nesnelerimizin string değerlerini alacağız ki bizim örneğimizde;
+
+    public int compare(Student o1, Student o2) {
+        return o1.getName().compareTo(o2.getName());
+    }
+
+Şeklinde olacaktır.
