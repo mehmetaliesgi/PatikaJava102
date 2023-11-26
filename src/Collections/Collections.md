@@ -3,19 +3,19 @@
 Java Collections (Koleksiyonlar), nesne grubunu depolamak veya işlem yapma gibi işlemleri sağlayan bir türdür. Şöyle düşünelim, program geliştirirken bir değişken içerisinde birden fazla eleman tutmak isteyebiliriz. Bunun gibi durumlarda Java Collections (Koleksiyonlar) sınıfını kullanmak bizim için en verimli seçenek olacaktır. Genel itibariyle Set, List ve Map olmak üzere 3 temel türden oluşmaktadır. Bunlara Collection Framework denmektedir.
 Java’da Collections (Koleksiyonlar) ne işe yarar nerelerde kullanırız dersek. Java Collections (Koleksiyonlar) veri depolamak, veri silmek, veri ekleme ve depolanan verileri içerisinde veri aramak gibi işlemler için kullanılırlar. Bu gibi işlemler Java’da Diziler ile de yapılabilir ama Collections ile daha hızlı ve daha kolay bir şekilde yapıldığı için Collections kullanımı tercih edilir.
 
- - Set Nesnesi: Kendisine verilen elemanların her birinde sadece bir tanesini tutar. Kopya ya da
+ - **Set Nesnesi:** Kendisine verilen elemanların her birinde sadece bir tanesini tutar. Kopya ya da
 tekrarlanan elemanları barındırmaz.
- - List Nesnesi: Kendisine verilen elemanları sıralı şekilde tutar. Tekrarlana elemanları barındırabilir.
- - Map Nesnesi: Her biri birbirinden farklı anahtarlar ile eşleştirilen nesnelerden oluşur.
+ - **List Nesnesi:** Kendisine verilen elemanları sıralı şekilde tutar. Tekrarlana elemanları barındırabilir.
+ - **Map Nesnesi:** Her biri birbirinden farklı anahtarlar ile eşleştirilen nesnelerden oluşur.
 
-## Set
+## SET
 Set interface'inde kullanabileceğimiz 3 adet yapı mevcuttur. Bunlar;
 
-- HashSet
-- LinkedHashSet
-- TreeSet
+1. HashSet
+2. LinkedHashSet
+3. TreeSet
 
-### - HashSet
+### 1. HashSet
 Yukarıda Set nesnesinin tanımını yapmıştık. Bu sebeple HashSet'ten başlayarak tanımlanma şekillerini inceleyelim.
 
     HashSet<WrapperClass> hashName = new HashSet<>();
@@ -78,7 +78,7 @@ döngüsü ile yaparız.
 
 Yukarıdaki kod satırı cümlelerimizi daha anlamlı kılmıştır umarım.
 
-### - LinkedHashSet
+### 2. LinkedHashSet
 
 LinkedHashSet normal HashSet'ten farklı olarak giren değer sırası ile çıktı sırası aynıdır. Yani FIFO kuralına uyum sağlar. Yine HashSet'te olduğu gibi tekrar eden değerler bulundurmaz.
 Tanımlanması aşağıdaki gibidir;
@@ -88,7 +88,7 @@ Tanımlanması aşağıdaki gibidir;
 Tanımlanma şekli yukarıdaki gibidir ve HashSet için kullandığımız hangi hazır method var ise bu yapı içinde aynı metodları kullanabiliriz.
 
 
-### - TreeSet
+### 3. TreeSet
 
 Yine TreeSet içinde tekrarlanan öğeleri içermediğini söyleyebiliriz. Burada TreeSet'i diğer Set metodlarında ayıran özellik ise Comparator interface'ini implemente etmesi ve istediğimiz bir veriye göre sıralama yapabilmemize olanak sağlamasıdır.
 Tanımlanma şekli diğerleri gibi aynıdır fakat parametre olarak bir sıralama şekli alırlar. Örnek olarak koda dökeceğiz. Burada sadece tanım olarak geçelim. Yine aynı metodlara ek olarak bir kaç farklı hazır metod kullanılabilir. Araştırabilirsiniz.
@@ -115,3 +115,42 @@ Bunun için ise tanımlanmış özel compareTo metodu vardır. Yine Comparator i
     }
 
 Şeklinde olacaktır. Tersini almak için yine reserved metodunu kullanabiliriz.
+
+
+## LIST
+List Interface, Java'nın java.util paketinde yer alan bir arabirimdir ve sıralı koleksiyonları temsil eder. Bu arabirim, Java koleksiyon çerçevesinin bir parçasıdır ve birçok farklı liste türünü temsil etmek için kullanılır. List, aşağıdaki temel özellikleri sunar:
+
+1. **Sıralı Elemanlar:** List, eklenen elemanların sıralı bir şekilde saklandığı bir koleksiyon yapısıdır. Yani elemanlar eklenme sırasına göre tutulur ve belirli bir sıra numarasına (indeks) sahiptirler.
+2. **Duplications (Çoğaltmalar):** List, aynı elemanın birden fazla kez koleksiyona eklenmesine izin verir. Yani bir List içinde aynı elemanı birden fazla kez bulabilirsiniz.
+3. **Indeksleme:** Elemanlara indeks numaralarıyla erişilebilir. Bu, belirli bir elemanı hızlıca bulmayı ve değiştirmeyi sağlar.
+
+Java’da List arabirimini uygulayan birkaç sınıf vardır, en yaygın olanları şunlardır:
+
+1. **ArrayList:** Dinamik bir dizi yapısını temsil eder ve elemanları bir dizide saklar. Elemanların indeksleme işlemi hızlıdır.
+2. **LinkedList:** Bağlantılı liste yapısını temsil eder ve elemanları çift yönlü bağlantılı düğümler aracılığıyla saklar. Elemanların eklenmesi ve çıkarılması hızlıdır.
+3. **Vector:** Dinamik bir dizi yapısını temsil eder, ancak senkronize edilmiştir, bu nedenle çoklu işlem ortamlarında kullanılabilir.
+
+`List` arabirimini kullanarak, sıralı verileri kolayca işleyebilir ve yönetebilirsiniz. Bu, veritabanı sonuçları, kullanıcıların girdileri ve daha pek çok senaryoda kullanışlıdır.
+
+### 1. ArrayList
+Java’da ArrayList, java.util paketinde bulunan ve dinamik bir dizi (dynamic array) yapısını temsil eden bir sınıftır. ArrayList, Java koleksiyon çerçevesinin bir parçasıdır ve List arabirimini uygular. ArrayList'in temel özellikleri:
+
+1. **Dinamik Dizi Yapısı:** ArrayList, dinamik bir dizi yapısını temsil eder. Bu, ArrayList'in boyutunu otomatik olarak ayarlayabilmesi ve elemanların eklenmesi veya çıkarılması durumunda dinamik olarak büyüyebilmesi anlamına gelir. Yani boyutu sabit değildir.
+2. **Sıralı Elemanlar:** Elemanlar, eklenme sırasına göre saklanır ve bir indeks numarası ile erişilebilirler. Bu, verileri sıralı bir şekilde tutmanızı sağlar.
+3. **Duplications (Çoğaltmalar):** ArrayList, aynı elemanın birden fazla kez koleksiyona eklenmesine izin verir. Yani aynı elemanı birden fazla kez ekleyebilirsiniz.
+4. **Hızlı Indeksleme:** Elemanlara indeks numaralarıyla hızlıca erişebilirsiniz. Bu, belirli bir elemanı hızlıca bulmayı ve değiştirmeyi sağlar.
+5. **Genel Kullanım:** ArrayList, genel kullanıma uygun bir veri yapısıdır ve birçok farklı veri türünü saklayabilirsiniz (örneğin, String, Integer, benzeri nesneler).
+
+Şu şekilde tanımlanır:
+    
+    List<Integer> liste = new ArrayList<>();
+
+ArrayList sınıfının bazı temel metotları şunlardır:
+
+- **add(E element):** Belirtilen elemanı ArrayList'e ekler.
+- **remove(int index):** Belirtilen indeksteki elemanı kaldırır.
+- **get(int index):** Belirtilen indeksteki elemanı döndürür.
+- **size():** Listenin boyutunu (eleman sayısını) döndürür.
+- **isEmpty():** Liste boşsa true, doluysa false döndürür.
+- **clear():** Listeyi temizler, yani tüm elemanları kaldırır.
+

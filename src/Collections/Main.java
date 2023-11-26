@@ -1,9 +1,6 @@
 package Collections;
 
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedHashSet;
-import java.util.TreeSet;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -44,6 +41,7 @@ public class Main {
             System.out.println(itr.next());
         }*/
 
+        /*
         //TreeSet<Student> students = new TreeSet<>(new OrderNoteComparable().reversed());
         //TreeSet<Student> students = new TreeSet<>(new OrderNoteComparable());
         TreeSet<Student> students = new TreeSet<>(new OrderNameComparable());
@@ -61,7 +59,65 @@ public class Main {
         while (itr.hasNext()) {
             System.out.println(itr.next().getName());
         }
+*/
+        ArrayList<Integer> list = new ArrayList<>();
 
+        list.add(10);
+        list.add(20);
+        list.add(10);
+        list.add(20);
+        list.add(null);
+        list.add(30);
+        list.add(-10);
+
+        System.out.println("Listemizin boyutu: " + list.size());
+        System.out.println("Listemizdeki 4. elemanın değeri: " + list.get(4));
+        System.out.println("Listemizde 30 değeri " + list.indexOf(30) + ". indexte tutulur.");
+        System.out.println("Listemizde 10 değerinin en son görüldüğü index değeri: " + list.lastIndexOf(10));
+
+        System.out.println("Listemizdeki 2. indexte: " + list.get(2) + " değeri bulunmaktadır.");
+        // add metodu bu şekilde kullanılırsa araya eleman ekleme işlemi yapar. Yani 2. indexte artık 24 var ve daha önceden 2. indexteki değeri 3. indexe öteler.
+        list.add(2, 24);
+        System.out.println("Listemizdeki 2. indexte artık: " + list.get(2) + " değeri bulunmaktadır.");
+        System.out.println("Listemizdeki 3. indexte artık: " + list.get(3) + " değeri bulunmaktadır.");
+
+        //Fakat set metodu 2. indexteki değerin valuesini değiştirir. Öteleme yapmaz, direkt o hafızadaki değere etki eder.
+        list.set(2, 25);
+        System.out.println("Listemizdeki 2. indexte artık: " + list.get(2) + " değeri bulunmaktadır.");
+
+        System.out.println("10 değeri listemizde bulunuyor: " + list.contains(10));
+        System.out.println("1210 değeri listemizde bulunuyor: " + list.contains(1210));
+
+        System.out.println("4. indexteki değeri sildim ve içinde bu veri vardı: " + list.remove(4));
+        System.out.println("Remove metodu sadece indexe göre değil value değerine göre de silme işlemi yapabilir: " + list.remove(null));
+/*
+        for (Integer value : list) {
+            System.out.println(value);
+        }
+*/
+        List<Integer> list2 = new ArrayList<>();
+        //bir listeyi diğer listeye kopyalama işlemi
+        list2.addAll(list);
+        list2.add(212);
+
+        //Bir listenin sublistini alabilirsiniz. İlk parametre sublisti nereden almaya başlayacağını, ikinci parametre ise nereye kadar alacağını belirtir.
+        List<Integer> list3 = list.subList(3, 6);
+
+        Iterator itr = list.iterator();
+        while (itr.hasNext()) {
+            System.out.println(itr.next());
+        }
+
+
+        Iterator itr2 = list2.iterator();
+        while (itr2.hasNext()) {
+            System.out.println(itr2.next());
+        }
+
+        Iterator itr3 = list3.iterator();
+        while (itr3.hasNext()) {
+            System.out.println(itr3.next());
+        }
 
     }
 }
