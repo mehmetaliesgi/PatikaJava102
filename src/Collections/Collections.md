@@ -197,3 +197,24 @@ Vector sınıfının temel özellikleri şunlardır:
 Yine listlerde kullanılan metodları vectorler içinde kullanabilirsiniz.
 
 Vector sınıfı, Java'nın eski koleksiyon yapısıdır ve özellikle çoklu işlem ortamlarında kullanılması gerektiğinde tercih edilir. Ancak yeni Java koleksiyon çerçevesinde daha modern alternatifler (örneğin, ArrayList veya LinkedList) mevcuttur ve performans açısından daha iyi sonuçlar verebilir. Dolayısıyla, yeni projelerde Vector kullanmak yerine bu modern alternatiflere yönelmek genellikle daha iyi bir seçenektir.
+
+## QUEUE
+Queue arayüzü java.util paketinde bulunur ve Collection arayüzünü genişletir, FIFO (İlk Giren İlk Çıkar) sırasına göre işlenmek üzere olan öğeleri tutmak için kullanılır. Kullanımı listenin sonuna eleman eklemek ve listenin başından eleman silmekle sınırlı olan nesnelerin sıralı bir listesidir (yani), FIFO veya İlk Giren İlk Çıkar ilkesini izler.
+Bir interface olan Queue'larda nesne oluşturabilmek ve veri saklayabilmek için **LinkedList Class'ı** ve **PriorityQueue Class'ından** yararlanır.
+
+### 1. Queue LinkedList
+Queue arayüzü Java Collections Framework ‘un bir üyesidir. İşlemlerden geçmeden önce öğeleri depolanmasını sağlar. Collection arayüzünün bir altarayüzü olduğundan, onun bütün metotlarını kullanır. Onlara ek olarak, kuyruk yapısındaki ekleme, silme gibi işlemleri kolaylaştıran metotlara sahiptir.
+
+Ortaya çıkış nedeniyle, Queue bir FIFO (first-in-first-out, ilk giren ilk çıkar) yapısıdır. Ancak, Queue ve Collection arayüzündeki metotlar kullanılarak, FIFO yapısı LIFO (last-input-first-output, son giren ilk çıkar) yapısı gibi kullanılabilir. **FIFO** ve **LIFO** yapılarına öncelik sıralamalı kuyruklar (priority queues) denilir.
+
+Genel metodları:
+
+- **element():** Kuyruğun başındaki öğeyi verir, ama onu kuyruktan atmaz.
+- **add(eleman):** Parametrede verilen elemanı kuyruğa ekler. İşlemin başarısız olması durumunda hata fırlatır.
+- **offer(eleman):** Parametrede verilen elemanı kuyruğa ekler. İşlemin başarısız olması durumunda null döner.
+- **poll():** Kuyruğun başındaki elemanı kuyruktan çıkartır.
+- **peek():** Kuyrukta sıradaki elemana ulaşmak için kullanılır.
+- **remove():** Kuyruktaki belirli bir indisteki belirli bir değeri siler. Fakat sadece **OBJE** parametresi alır.
+
+Tabi yukarıdaki metodlardan daha fazlası mevcuttur.
+

@@ -148,7 +148,7 @@ public class Main {
         }
         */
 
-        Vector<String> vc = new Vector<>();
+       /* Vector<String> vc = new Vector<>();
 
         vc.add("Ankara");
         vc.add("Ankara");
@@ -162,6 +162,30 @@ public class Main {
 
         Iterator<String> itr = vc.iterator();
         while (itr.hasNext()){
+            System.out.println(itr.next());
+        }
+        */
+
+        Queue<String> queueList = new LinkedList<>();
+
+        queueList.add("Ankara");
+        queueList.add("İzmir");
+        queueList.add("Bursa");
+        queueList.add("Mersin");
+        queueList.add("Antalya");
+        queueList.add("Aydın");
+
+        Iterator<String> itr = queueList.iterator();
+        while (itr.hasNext()) {
+            System.out.println(itr.next());
+        }
+
+        System.out.println("Kuyruktaki nesne sayısı: " + queueList.size());
+        System.out.println("Kuyrukta girmiş ilk nesne: " + queueList.element());
+        System.out.println("Kuyruğa Niğde değeri eklendi: " + queueList.offer("Niğde"));
+        System.out.println("Kuyruğun başındaki eleman kuyruktan çıktı: " + queueList.poll());
+
+        while (itr.hasNext()) {
             System.out.println(itr.next());
         }
     }
