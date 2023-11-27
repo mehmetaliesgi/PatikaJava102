@@ -154,3 +154,28 @@ ArrayList sınıfının bazı temel metotları şunlardır:
 - **isEmpty():** Liste boşsa true, doluysa false döndürür.
 - **clear():** Listeyi temizler, yani tüm elemanları kaldırır.
 
+### 2. LinkedList
+Java’da LinkedList sınıfı, java.util paketinde bulunan ve bağlantılı liste (linked list) yapısını temsil eden bir sınıftır. LinkedList, Java koleksiyon çerçevesinin bir parçasıdır ve List arabirimini uygular.
+LinkedList sınıfı, elemanları çift yönlü bağlantılı düğümler (nodes) aracılığıyla saklar. Her düğüm, bir veri elemanı ve bir sonraki düğümün referansını içerir. Bu yapı, **elemanların eklenmesi ve çıkarılması işlemlerini hızlı yapmayı** sağlar.
+
+LinkedList sınıfının temel özellikleri şunlardır:
+1. **Çift Yönlü Bağlantı:** Her düğüm, hem bir sonraki düğümün hem de bir önceki düğümün referansını içerir. Bu, düğümler arasında ileri ve geri gezinmeyi kolaylaştırır.
+2. **Dinamik Boyut:** LinkedList, boyutu otomatik olarak ayarlayabilen bir veri yapısıdır. Elemanlar eklenip çıkarıldıkça dinamik olarak büyüyebilir.
+3. **Sıralı Elemanlar:** Elemanlar, eklenme sırasına göre saklanır ve indeks numarası ile erişilebilirler. Bu, verilerin sıralı bir şekilde tutulmasını sağlar.
+4. **Duplications (Çoğaltmalar):** LinkedList, aynı elemanın birden fazla kez koleksiyona eklenmesine izin verir.
+5. **Bağlantılı Liste Mantığı:** Elemanların eklenmesi ve çıkarılması, düğümler arasındaki referansların güncellenmesiyle gerçekleşir. Bu, ekleme ve çıkarma işlemlerinin hızlı olmasını sağlar.
+
+Şu şekilde tanımlama yapılır:
+
+    LinkedList<String> linkedList = new LinkedList<>();
+
+LinkedList sınıfının bazı temel metotları şunlardır:
+
+- **add(E element):** Belirtilen elemanı LinkedList'e ekler.
+- **remove(int index):** Belirtilen indeksteki elemanı kaldırır.
+- **get(int index):** Belirtilen indeksteki elemanı döndürür.
+- **size():** Listenin boyutunu (eleman sayısını) döndürür.
+- **isEmpty():** Liste boşsa true, doluysa false döndürür.
+- **clear():** Listeyi temizler, yani tüm elemanları kaldırır.
+
+#### NOT: `LinkedList` sınıfı, özellikle elemanların eklenmesi ve çıkarılmasının sıkça yapıldığı senaryolarda kullanışlıdır. Ancak indeksleme işlemi, doğrudan elemanların indeks numarasına erişimi desteklemediği için `ArrayList` gibi sıralı erişim gerektiren durumlarda daha hızlıdır.

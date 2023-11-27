@@ -60,6 +60,7 @@ public class Main {
             System.out.println(itr.next().getName());
         }
 */
+       /*
         ArrayList<Integer> list = new ArrayList<>();
 
         list.add(10);
@@ -90,11 +91,11 @@ public class Main {
 
         System.out.println("4. indexteki değeri sildim ve içinde bu veri vardı: " + list.remove(4));
         System.out.println("Remove metodu sadece indexe göre değil value değerine göre de silme işlemi yapabilir: " + list.remove(null));
-/*
+*//*
         for (Integer value : list) {
             System.out.println(value);
         }
-*/
+*//*
         List<Integer> list2 = new ArrayList<>();
         //bir listeyi diğer listeye kopyalama işlemi
         list2.addAll(list);
@@ -118,6 +119,31 @@ public class Main {
         while (itr3.hasNext()) {
             System.out.println(itr3.next());
         }
+*/
 
+        LinkedList<String> list = new LinkedList<>();
+
+        list.add("Ali");
+        list.add("Şeyma");
+        list.add("Kerem");
+        list.add("Yavuz");
+        list.add("Ebrar");
+        list.add("Ali");
+
+        //Remove işlemi yaparken objenin kendisini veya index numarasını vererek remove işlemi yapabilirsiniz.
+
+        list.remove("Ali");
+        list.remove(3);
+
+        list.add("Yavuz");
+
+        //list.clear();
+
+        System.out.println("Kerem değeri listemizde mevcut mu? " + list.contains("Kerem"));
+
+        Iterator<String> itr = list.iterator();
+        while (itr.hasNext()){
+            System.out.println(itr.next());
+        }
     }
 }
