@@ -218,3 +218,16 @@ Genel metodları:
 
 Tabi yukarıdaki metodlardan daha fazlası mevcuttur.
 
+Tanımlanma şekli: 
+    
+    Queue<String> qList = new LinkedList<>();
+
+### 2.PriorityQueue
+Queue LinkedListten tek farkı kendi sıralama yöntemlerimizi yazabiliriz.
+
+Tanımlanma şekli:
+
+    PriorityQueue<String> qList = new PriorityQueue<>(Sıralama işlemi); 
+
+Küçük bir örnek yaparak daha iyi anlaşılır kılalım.
+

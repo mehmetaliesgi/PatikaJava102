@@ -166,6 +166,7 @@ public class Main {
         }
         */
 
+        /*
         Queue<String> queueList = new LinkedList<>();
 
         queueList.add("Ankara");
@@ -187,6 +188,37 @@ public class Main {
 
         while (itr.hasNext()) {
             System.out.println(itr.next());
+        }
+        */
+
+        PriorityQueue<String> priorityQueue = new PriorityQueue<>(new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                return o1.compareTo(o2);
+            }
+        }.reversed());
+
+        priorityQueue.add("Mehmet");
+        priorityQueue.add("Ali");
+        priorityQueue.add("Eşgi");
+        priorityQueue.add("Tekirdağ");
+        priorityQueue.add("Türkiye");
+
+        Iterator<String> iterator = priorityQueue.iterator();
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next());
+        }
+
+        System.out.println("--------------------------");
+        System.out.println(priorityQueue.contains("Türkiye"));
+        System.out.println(priorityQueue.size());
+        System.out.println(priorityQueue.remove("Ali"));
+        System.out.println(priorityQueue.offer("Ali"));
+        System.out.println(priorityQueue.poll());
+        System.out.println("--------------------------");
+
+        for (String value : priorityQueue){
+            System.out.println(value);
         }
     }
 }
