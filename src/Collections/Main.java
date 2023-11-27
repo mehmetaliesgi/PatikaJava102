@@ -121,6 +121,7 @@ public class Main {
         }
 */
 
+        /*
         LinkedList<String> list = new LinkedList<>();
 
         list.add("Ali");
@@ -142,6 +143,24 @@ public class Main {
         System.out.println("Kerem değeri listemizde mevcut mu? " + list.contains("Kerem"));
 
         Iterator<String> itr = list.iterator();
+        while (itr.hasNext()){
+            System.out.println(itr.next());
+        }
+        */
+
+        Vector<String> vc = new Vector<>();
+
+        vc.add("Ankara");
+        vc.add("Ankara");
+        vc.add("İstanbul");
+        vc.add("İzmir");
+        vc.add("Trabzon");
+        vc.add("Mersin");
+        vc.add(1,"Bursa");
+
+        System.out.println("Bursa değeri listemizde var mı? " + vc.contains("Bursa"));
+
+        Iterator<String> itr = vc.iterator();
         while (itr.hasNext()){
             System.out.println(itr.next());
         }

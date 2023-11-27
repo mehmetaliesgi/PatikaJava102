@@ -179,3 +179,21 @@ LinkedList sınıfının bazı temel metotları şunlardır:
 - **clear():** Listeyi temizler, yani tüm elemanları kaldırır.
 
 #### NOT: `LinkedList` sınıfı, özellikle elemanların eklenmesi ve çıkarılmasının sıkça yapıldığı senaryolarda kullanışlıdır. Ancak indeksleme işlemi, doğrudan elemanların indeks numarasına erişimi desteklemediği için `ArrayList` gibi sıralı erişim gerektiren durumlarda daha hızlıdır.
+
+### 3. Vector
+Java’da Vector sınıfı, java.util paketinde bulunan ve bir dinamik dizi (dynamic array) yapısını temsil eden bir sınıftır. Vector, Java koleksiyon çerçevesinin bir parçasıdır ve List arabirimini uygular. Ancak ArrayList gibi değil, Vector birçok işlemi senkronize bir şekilde yönetir, bu da çoklu işlem (multithreading) ortamlarında kullanılabilir olmasını sağlar.
+
+Vector sınıfının temel özellikleri şunlardır:
+
+1. **Dinamik Dizi Yapısı:** Vector, dinamik bir dizi yapısıdır. Yani boyutu otomatik olarak ayarlayabilmesi ve elemanlar eklenip çıkarıldıkça dinamik olarak büyüyebilmesi anlamına gelir.
+2. **Sıralı Elemanlar:** Elemanlar, eklenme sırasına göre saklanır ve bir indeks numarası ile erişilebilirler. Bu, verilerin sıralı bir şekilde tutulmasını sağlar.
+3. **Duplications (Çoğaltmalar):** Vector, aynı elemanın birden fazla kez koleksiyona eklenmesine izin verir. Yani aynı elemanı birden fazla kez ekleyebilirsiniz.
+4. **Senkronizasyon:** Vector sınıfı, işlemlerin senkronize (thread-safe) bir şekilde gerçekleştirilmesini sağlar. Bu, çoklu işlem ortamlarında kullanılabilirliğini artırır.
+
+Şu şekilde tanımlama yapılır:
+
+    Vector<Integer> vc = new Vector<>();
+
+Yine listlerde kullanılan metodları vectorler içinde kullanabilirsiniz.
+
+Vector sınıfı, Java'nın eski koleksiyon yapısıdır ve özellikle çoklu işlem ortamlarında kullanılması gerektiğinde tercih edilir. Ancak yeni Java koleksiyon çerçevesinde daha modern alternatifler (örneğin, ArrayList veya LinkedList) mevcuttur ve performans açısından daha iyi sonuçlar verebilir. Dolayısıyla, yeni projelerde Vector kullanmak yerine bu modern alternatiflere yönelmek genellikle daha iyi bir seçenektir.
