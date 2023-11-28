@@ -43,3 +43,15 @@ Map nesnesinde işlem yaparken anahtar ve değer ikilisi olduğu için işlemimi
 
 Şeklinde bir for döngüsü ile map içersindeki anahtar ve değer değerlerini gezip işlem yapabiliriz.
 
+## 1. HashMap
+
+HashMap, Java 1.2'den beri Java'nın koleksiyonunun bir parçasıdır. Java'nın Map arayüzünün temel uygulamasını sağlar. Verileri (Anahtar, Değer) çiftleri halinde saklar. Bir değere erişmek için anahtarını bilmek gerekir. Bu sınıf Hashing adı verilen bir teknik kullanır. Hashing, büyük bir String'i aynı String'i temsil eden küçük bir String'e dönüştürme tekniğidir. Daha kısa bir değer indekslemeye ve daha hızlı aramaya yardımcı olur.
+
+## 2. LinkedHashMap
+
+Linked olması bir kere sıralı olarak çıktı vermesini sağlar. Biliyoruz ki HashMap'de girdiğimiz sırada çıktı alamıyoruz. Hash yapısı hafızada kendisine göre bir veri tutma şekli var. Fakat LinkedHashMap'te girilen sıra aynı şekilde hafızada tutulur.
+
+## 3. TreeMap
+
+Daha önceden TreeSet'te olduğu gibi burada da TreeMap bir sıralama ifadesini bizden parametre olarak alabilir. Örnek kod girdisini yapalım ve daha anlaşılır olsun.
+
