@@ -1,6 +1,7 @@
 package PatikaStore;
 
 public class CellPhones {
+    private int phoneId;
     private int phoneIMEI;
     private double phonePrice;
     private double phoneDiscount;
@@ -13,7 +14,8 @@ public class CellPhones {
     private int phoneRAM;
     private String phoneColor;
 
-    public CellPhones(int phoneIMEI, double phonePrice, double phoneDiscount, int phoneStockCount, String phoneName, String phoneBrand, int phoneMemorySize, double phoneScreenSize, int phoneBattary, int phoneRAM, String phoneColor) {
+    public CellPhones(int phoneId, int phoneIMEI, double phonePrice, double phoneDiscount, int phoneStockCount, String phoneName, String phoneBrand, int phoneMemorySize, double phoneScreenSize, int phoneBattary, int phoneRAM, String phoneColor) {
+        this.phoneId = phoneId;
         this.phoneIMEI = phoneIMEI;
         this.phonePrice = phonePrice;
         this.phoneDiscount = phoneDiscount;
@@ -25,6 +27,10 @@ public class CellPhones {
         this.phoneBattary = phoneBattary;
         this.phoneRAM = phoneRAM;
         this.phoneColor = phoneColor;
+    }
+
+    public int getPhoneId() {
+        return phoneId;
     }
 
     public int getPhoneIMEI() {

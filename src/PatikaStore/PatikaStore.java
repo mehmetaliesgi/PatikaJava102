@@ -37,7 +37,8 @@ public class PatikaStore {
                     kosul = false;
                     break;
                 case 2:
-                    System.out.println("Cep telefonu işlemlerine girdiniz.");
+                    System.out.println("Cep Telefonu Listesi");
+                    operations.cellPhonesLists();
                     kosul = false;
                     break;
                 case 3:

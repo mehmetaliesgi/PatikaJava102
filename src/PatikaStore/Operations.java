@@ -28,4 +28,29 @@ public class Operations {
             System.out.println(" - " + itr.next().getBrandsName());
         }
     }
+
+    public void cellPhonesLists() {
+        TreeSet<CellPhones> cellPhonesTreeSet = new TreeSet<>(new Comparator<CellPhones>() {
+            @Override
+            public int compare(CellPhones o1, CellPhones o2) {
+                return o1.getPhoneId() - o2.getPhoneId();
+            }
+        });
+
+        cellPhonesTreeSet.add(new CellPhones(1, 11111, 1000, 10, 20, "Samsung Galaxy A51", "Samsung", 128, 6.0, 6500, 64, "Black"));
+        cellPhonesTreeSet.add(new CellPhones(2, 22222, 2000, 20, 30, "iPhone 11\t\t", "Apple\t", 512, 6.2, 4500, 64, "Silver"));
+        cellPhonesTreeSet.add(new CellPhones(3, 33333, 3000, 30, 40, "Huawei Mate 40 Pro", "Huawei", 256, 5.8, 5000, 64, "Yellow"));
+        cellPhonesTreeSet.add(new CellPhones(4, 44444, 4000, 40, 50, "Redmi Note 12 Pro", "Xiaomi", 128, 5.5, 6000, 64, "Green"));
+
+        //Iterator<CellPhones> iterator = cellPhonesTreeSet.iterator();
+        System.out.println("-----------------------------------------------------------------------------------------------------------------------------");
+        System.out.println("| ID |\tÜrün Adı\t\t\t\t\t| Fiyat\t\t\t| Marka\t\t| Depolama\t | Ekran\t| Pil\t\t| RAM\t\t| Renk \t\t|");
+        System.out.println("-----------------------------------------------------------------------------------------------------------------------------");
+        for (CellPhones cellPhone : cellPhonesTreeSet) {
+            System.out.println("| " + cellPhone.getPhoneId() + " |\t" + cellPhone.getPhoneName() + "\t\t\t| " + cellPhone.getPhonePrice() + " TL\t\t| " +
+                    cellPhone.getPhoneBrand() + "\t| " + cellPhone.getPhoneMemorySize() + " GB\t | " + cellPhone.getPhoneScreenSize() + " inc\t| " +
+                    cellPhone.getPhoneBattary() + "\t\t| " + cellPhone.getPhoneRAM() + " GB\t\t| " + cellPhone.getPhoneColor() + " \t|");
+        }
+        System.out.println("-----------------------------------------------------------------------------------------------------------------------------");
+    }
 }
