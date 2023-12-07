@@ -34,6 +34,7 @@ public class PatikaStore {
                     break;
                 case 1:
                     System.out.println("Notebook işlemlerine girdiniz.");
+                    operations.notebookLists();
                     kosul = false;
                     break;
                 case 2:

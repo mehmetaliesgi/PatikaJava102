@@ -53,4 +53,28 @@ public class Operations {
         }
         System.out.println("-----------------------------------------------------------------------------------------------------------------------------");
     }
+
+    public void notebookLists() {
+        TreeSet<Notebooks> notebookssTreeSet = new TreeSet<>(new Comparator<Notebooks>() {
+            @Override
+            public int compare(Notebooks o1, Notebooks o2) {
+                return o1.getNotebookID() - o2.getNotebookID();
+            }
+        });
+
+        notebookssTreeSet.add(new Notebooks(1, 11111, "LENOVO V14 IGL", 3000, 10, "Lenevo", 8, 512, 14));
+        notebookssTreeSet.add(new Notebooks(2, 22222, "ASUS Tuf Gaming",4000, 20, "Asus\t", 16, 512, 14));
+        notebookssTreeSet.add(new Notebooks(3, 33333, "HUAWEI Matebook",5000, 30, "Huawei", 8, 512, 14));
+        notebookssTreeSet.add(new Notebooks(4, 44444, "Macbook Pro 14",6000, 40, "Apple\t", 32, 512, 14));
+
+        System.out.println("---------------------------------------------------------------------------------------------");
+        System.out.println("| ID |\tÜrün Adı\t\t\t\t| Fiyat\t\t\t| Marka\t\t| Depolama\t | Ekran\t| RAM\t|");
+        System.out.println("---------------------------------------------------------------------------------------------");
+        for (Notebooks notebook : notebookssTreeSet) {
+            System.out.println("| " + notebook.getNotebookID() + " |\t" + notebook.getNotebookName() + "\t\t\t| " + notebook.getNotebookPrice() + " TL\t\t| " +
+                    notebook.getNotebookBrand() + "\t| " + notebook.getNotebookMemory() + " GB\t | " + notebook.getNotebookScreenSize() + " inc\t| " +
+                    + notebook.getNotebookRAM() + " GB\t|");
+        }
+        System.out.println("---------------------------------------------------------------------------------------------");
+    }
 }
