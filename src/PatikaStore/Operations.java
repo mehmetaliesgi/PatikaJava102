@@ -1,9 +1,6 @@
 package PatikaStore;
 
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.Scanner;
-import java.util.TreeSet;
+import java.util.*;
 
 public class Operations {
     public Scanner scanner = new Scanner(System.in);
@@ -83,9 +80,11 @@ public class Operations {
     }
     public TreeSet<CellPhones> cellPhonesLists() {
         cellPhonesTreeSet.add(new CellPhones(1, 11111, 1000, 10, 20, "Samsung Galaxy A51", "Samsung", 128, 6.0, 6500, 64, "Black"));
-        cellPhonesTreeSet.add(new CellPhones(2, 22222, 2000, 20, 30, "iPhone 11\t\t", "Apple\t", 512, 6.2, 4500, 64, "Silver"));
+        cellPhonesTreeSet.add(new CellPhones(2, 22222, 2000, 20, 30, "iPhone 11\t\t", "Apple", 512, 6.2, 4500, 64, "Silver"));
         cellPhonesTreeSet.add(new CellPhones(3, 33333, 3000, 30, 40, "Huawei Mate 40 Pro", "Huawei", 256, 5.8, 5000, 64, "Yellow"));
-        cellPhonesTreeSet.add(new CellPhones(4, 44444, 4000, 40, 50, "Redmi Note 12 Pro", "Xiaomi", 128, 5.5, 6000, 64, "Green"));
+        cellPhonesTreeSet.add(new CellPhones(4, 44444, 3000, 30, 40, "Huawei Mate 50 Pro", "Huawei", 256, 5.8, 5000, 64, "Silver"));
+        cellPhonesTreeSet.add(new CellPhones(5, 55555, 3000, 30, 40, "Huawei Mate 60 Pro", "Huawei", 256, 5.8, 5000, 64, "Green"));
+        cellPhonesTreeSet.add(new CellPhones(6, 66666, 4000, 40, 50, "Redmi Note 12 Pro", "Xiaomi", 128, 5.5, 6000, 64, "Green"));
 
         return cellPhonesTreeSet;
     }
@@ -105,7 +104,9 @@ public class Operations {
         notebooksTreeSet.add(new Notebooks(1, 11111, "LENOVO V14 IGL", 3000, 10, "Lenevo", 8, 512, 14.0));
         notebooksTreeSet.add(new Notebooks(2, 22222, "ASUS Tuf Gaming",4000, 20, "Asus\t", 16, 512, 14.0));
         notebooksTreeSet.add(new Notebooks(3, 33333, "HUAWEI Matebook",5000, 30, "Huawei", 8, 512, 14.0));
-        notebooksTreeSet.add(new Notebooks(4, 44444, "Macbook Pro 14",6000, 40, "Apple\t", 32, 512, 14.0));
+        notebooksTreeSet.add(new Notebooks(4, 44444, "Macbook Pro 14",6000, 40, "Apple", 32, 512, 14.0));
+        notebooksTreeSet.add(new Notebooks(5, 55555, "Macbook Pro 15",7000, 40, "Apple", 64, 512, 14.0));
+        notebooksTreeSet.add(new Notebooks(6, 66666, "Macbook Pro 16",8000, 40, "Apple", 64, 512, 14.0));
 
         return notebooksTreeSet;
     }
@@ -381,6 +382,71 @@ public class Operations {
                     break;
                 default:
                     System.out.println("Lütfen geçerli bir değer giriniz!!!");
+            }
+        }
+    }
+
+    public ArrayList<CellPhones> filterCellPhoneWithBrand(String productBrand) {
+        ArrayList<CellPhones> cellPhonesList = new ArrayList<>();
+        for (CellPhones cellPhone : cellPhonesTreeSet) {
+            if (cellPhone.getPhoneBrand().equals(productBrand)) {
+                cellPhonesList.add(cellPhone);
+            }
+        }
+        return cellPhonesList;
+    }
+
+    public ArrayList<Notebooks> filterNotebookWithBrand(String productBrand) {
+        ArrayList<Notebooks> notebooksList = new ArrayList<>();
+        for (Notebooks notebook : notebooksTreeSet) {
+            if (notebook.getNotebookBrand().equals(productBrand)) {
+                notebooksList.add(notebook);
+            }
+        }
+        return notebooksList;
+    }
+
+    public void filterProductWithBrand() {
+        cellPhonesLists();
+        notebookLists();
+
+        boolean kosul = true;
+        while (kosul) {
+            System.out.println("Lütfen yapmak istediğiniz işlemi giriniz: ");
+            System.out.println("1 - Filtreleme Yap ");
+            System.out.println("0 - Çıkış");
+            System.out.print("Seçiminiz: ");
+            int choose = scanner.nextInt();
+
+            switch (choose) {
+                case 0:
+                    System.out.println("Çıkış yaptınız!!!");
+                    kosul = false;
+                    break;
+                case 1:
+                    System.out.print("Lütfen filtrelem işlemi yapmak istediğiniz Marka'yı giriniz: ");
+                    scanner.nextLine();
+                    String productBrand = scanner.nextLine();
+                    filterCellPhoneWithBrand(productBrand);
+                    filterNotebookWithBrand(productBrand);
+
+                    if (filterCellPhoneWithBrand(productBrand) != null) {
+                        System.out.println("Cep Telefonu Markaları:  ");
+                        for (CellPhones cellPhone : filterCellPhoneWithBrand(productBrand)) {
+                            System.out.println("IMEI No: " + cellPhone.getPhoneIMEI() + ", Cep Telefonu İsmi: " + cellPhone.getPhoneName());
+                        }
+                    }
+                    if (filterNotebookWithBrand(productBrand) != null) {
+                        System.out.println("Notebook Markaları: ");
+                        for (Notebooks notebook : filterNotebookWithBrand(productBrand)) {
+                            System.out.println("IMEI No: " + notebook.getNotebookIMEI() + ", Notebook İsmi: " + notebook.getNotebookName());
+                        }
+                    } else {
+                        System.out.println(productBrand + " Markasında bir ürün bulunamadı!!!");
+                    }
+                    break;
+                default:
+                    System.out.println("Lütfen geçerli bir işlem seçiniz!!!");
             }
         }
     }

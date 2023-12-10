@@ -18,6 +18,7 @@ public class PatikaStore {
         operationsLinkedList.add(new OperationsLists(4, "Ürün Ekle"));
         operationsLinkedList.add(new OperationsLists(5, "Ürün Sil"));
         operationsLinkedList.add(new OperationsLists(6, "Ürün Ara"));
+        operationsLinkedList.add(new OperationsLists(7, "Filtrelem Yap!"));
         operationsLinkedList.add(new OperationsLists(0, "Çıkış Yap"));
 
         Operations operations = new Operations();
@@ -73,6 +74,10 @@ public class PatikaStore {
                     break;
                 case 6:
                     operations.productSearch();
+                    break;
+                case 7:
+                    operations.filterProductWithBrand();
+                    break;
                 default:
                     System.out.println("Lütfen geçerli bir işlem giriniz.");
             }
