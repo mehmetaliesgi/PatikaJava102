@@ -9,9 +9,9 @@ public class Notebooks {
     private String notebookBrand;
     private int notebookRAM;
     private int notebookMemory;
-    private int notebookScreenSize;
+    private double notebookScreenSize;
 
-    public Notebooks(int notebookID, int notebookIMEI, String notebookName, double notebookPrice, double notebookDiscount, String notebookBrand, int notebookRAM, int notebookMemory, int notebookScreenSize) {
+    public Notebooks(int notebookID, int notebookIMEI, String notebookName, double notebookPrice, double notebookDiscount, String notebookBrand, int notebookRAM, int notebookMemory, double notebookScreenSize) {
         this.notebookID = notebookID;
         this.notebookIMEI = notebookIMEI;
         this.notebookName = notebookName;
@@ -55,7 +55,7 @@ public class Notebooks {
         return notebookMemory;
     }
 
-    public int getNotebookScreenSize() {
+    public double getNotebookScreenSize() {
         return notebookScreenSize;
     }
 }

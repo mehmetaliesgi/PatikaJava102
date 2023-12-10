@@ -13,9 +13,9 @@ public class PatikaStore {
         LinkedList<OperationsLists> operationsLinkedList = new LinkedList<>();
         operationsLinkedList.add(new OperationsLists(1, "Ürünleri Listele"));
         //operationsLinkedList.add(new OperationsLists(2, "Cep Telefonlarını Listele"));
-        operationsLinkedList.add(new OperationsLists(3, "Marka Listele"));
-        operationsLinkedList.add(new OperationsLists(4, "Marka Ekle"));
-        operationsLinkedList.add(new OperationsLists(5, "Ürün Ekle"));
+        operationsLinkedList.add(new OperationsLists(2, "Marka Listele"));
+        operationsLinkedList.add(new OperationsLists(3, "Marka Ekle"));
+        operationsLinkedList.add(new OperationsLists(4, "Ürün Ekle"));
         operationsLinkedList.add(new OperationsLists(0, "Çıkış Yap"));
 
         Operations operations = new Operations();
@@ -39,25 +39,36 @@ public class PatikaStore {
                     operations.productLists();
                     break;
                 case 2:
-                    operations.cellPhonesLists();
-                    break;
-                case 3:
                     for (Brands brand : operations.brandsLists()) {
                         System.out.println(" - " + brand.getBrandsName());
                     }
+                    System.out.println("0 - Çıkış");
+                    int choose = scanner.nextInt();
+
+                    boolean kosul1 = true;
+                    while (kosul1) {
+                        switch (choose) {
+                            case 0:
+                                kosul1 = false;
+                                break;
+                            default:
+                                System.out.println("Geçerli bir işlem seçiniz!!!");
+                                System.out.println("0 - Çıkış");
+                                choose = scanner.nextInt();
+                        }
+                    }
                     break;
-                case 4:
+                case 3:
                     System.out.println("Markalarımız");
                     System.out.println("-------------------------------------");
                     operations.brandAdd();
                     break;
-                case 5:
+                case 4:
                     operations.productAdd();
                     break;
                 default:
                     System.out.println("Lütfen geçerli bir işlem giriniz.");
             }
-            //kosul = false;
         }
     }
 }

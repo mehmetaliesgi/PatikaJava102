@@ -7,11 +7,16 @@ import java.util.TreeSet;
 
 public class Operations {
     public Scanner scanner = new Scanner(System.in);
-
     public TreeSet<CellPhones> cellPhonesTreeSet = new TreeSet<>(new Comparator<CellPhones>() {
         @Override
         public int compare(CellPhones o1, CellPhones o2) {
             return o1.getPhoneId() - o2.getPhoneId();
+        }
+    });
+    public TreeSet<Notebooks> notebooksTreeSet = new TreeSet<>(new Comparator<Notebooks>() {
+        @Override
+        public int compare(Notebooks o1, Notebooks o2) {
+            return o1.getNotebookID() - o2.getNotebookID();
         }
     });
     public TreeSet brandsTreeSet = new TreeSet<>(new Comparator<Brands>() {
@@ -20,6 +25,8 @@ public class Operations {
             return o1.getBrandsName().compareTo(o2.getBrandsName());
         }
     });
+
+
     public TreeSet<Brands> brandsLists() {
         //Samsung, Lenovo, Apple, Huawei, Casper, Asus, HP, Xiaomi, Monster
         brandsTreeSet.add(new Brands(1, "Samsung"));
@@ -67,7 +74,8 @@ public class Operations {
                     System.out.println("Ürün Eklendi...");
                     break;
                 case 2:
-                    System.out.println("Bilgisayar eklenecek");
+                    notebooksTreeSet.add(notebookAdd());
+                    System.out.println("Ürün Eklendi...");
                     break;
                 default:
                     System.out.println("Lütfen geçerli bir kategori seçiniz!!!");
@@ -95,18 +103,12 @@ public class Operations {
     }
 
     public void notebookLists() {
-        System.out.println("Notebook işlemlerine girdiniz.");
-        TreeSet<Notebooks> notebooksTreeSet = new TreeSet<>(new Comparator<Notebooks>() {
-            @Override
-            public int compare(Notebooks o1, Notebooks o2) {
-                return o1.getNotebookID() - o2.getNotebookID();
-            }
-        });
+        System.out.println("Notebook listemiz!!!");
 
-        notebooksTreeSet.add(new Notebooks(1, 11111, "LENOVO V14 IGL", 3000, 10, "Lenevo", 8, 512, 14));
-        notebooksTreeSet.add(new Notebooks(2, 22222, "ASUS Tuf Gaming",4000, 20, "Asus\t", 16, 512, 14));
-        notebooksTreeSet.add(new Notebooks(3, 33333, "HUAWEI Matebook",5000, 30, "Huawei", 8, 512, 14));
-        notebooksTreeSet.add(new Notebooks(4, 44444, "Macbook Pro 14",6000, 40, "Apple\t", 32, 512, 14));
+        notebooksTreeSet.add(new Notebooks(1, 11111, "LENOVO V14 IGL", 3000, 10, "Lenevo", 8, 512, 14.0));
+        notebooksTreeSet.add(new Notebooks(2, 22222, "ASUS Tuf Gaming",4000, 20, "Asus\t", 16, 512, 14.0));
+        notebooksTreeSet.add(new Notebooks(3, 33333, "HUAWEI Matebook",5000, 30, "Huawei", 8, 512, 14.0));
+        notebooksTreeSet.add(new Notebooks(4, 44444, "Macbook Pro 14",6000, 40, "Apple\t", 32, 512, 14.0));
 
         System.out.println("---------------------------------------------------------------------------------------------");
         System.out.println("| ID |\tÜrün Adı\t\t\t\t| Fiyat\t\t\t| Marka\t\t| Depolama\t | Ekran\t| RAM\t|");
@@ -175,6 +177,57 @@ public class Operations {
 
         CellPhones cellPhone = new CellPhones(phoneID, phoneIMEI, phonePrice, phoneDiscount, phoneStockCount, phoneName, phoneBrand, phoneMemory, phoneScreenSize, phoneBattary, phoneRAM, phoneColor);
         return cellPhone;
+    }
+
+    public Notebooks notebookAdd(){
+        System.out.print("Lütfen Ürün ID giriniz: ");
+        int notebookID = scanner.nextInt();
+        System.out.print("Ürün IMEI numarasını giriniz: ");
+        int notebookIMEI = scanner.nextInt();
+        System.out.print("Ürün fiyarını giriniz: ");
+        scanner.nextLine();
+        double notebookPrice = scanner.nextDouble();
+        System.out.print("Ürün indirimini giriniz: ");
+        double notebookDiscount = scanner.nextDouble();
+        System.out.print("Ürün ismini giriniz: ");
+        scanner.nextLine();
+        String notebookName = scanner.nextLine();
+        System.out.print("Ürün markasını giriniz: ");
+        String notebookBrand = scanner.next();
+
+        boolean kosul = true;
+        boolean isThere = false;
+        while (kosul) {
+            Iterator<Brands> itr = brandsTreeSet.iterator();
+            while (itr.hasNext()) {
+                if (itr.next().getBrandsName().equals(notebookBrand)) {
+                    System.out.println("Markalarımızdan birini seçtiniz!");
+                    kosul = false;
+                    isThere = true;
+                    break;
+                }
+            }
+
+            if (isThere) {
+                break;
+            } else {
+                System.out.println("Lütfen aşağıdaki markadalardan birini giriniz: ");
+                for (Brands brand : brandsLists()) {
+                    System.out.println(" - " + brand.getBrandsName());
+                }
+                System.out.print("Ürün markasını giriniz: ");
+                notebookBrand = scanner.next();
+            }
+        }
+        System.out.print("Lütfen ürün hafıza kapasitesini giriniz: ");
+        int notebookMemory = scanner.nextInt();
+        System.out.print("Lütfen ürün ekran boyutunu giriniz: ");
+        double notebookScreenSize = scanner.nextDouble();
+        System.out.print("Lütfen RAM bilgisini giriniz: ");
+        int notebookRAM = scanner.nextInt();
+
+        Notebooks notebook = new Notebooks(notebookID, notebookIMEI, notebookName, notebookPrice, notebookDiscount, notebookBrand, notebookRAM, notebookMemory, notebookScreenSize);
+        return notebook;
     }
 
     public void productLists() {
