@@ -81,15 +81,16 @@ public class Operations {
             }
         }
     }
-    public void cellPhonesLists() {
-        System.out.println("Cep Telefonu Listesi");
-
+    public TreeSet<CellPhones> cellPhonesLists() {
         cellPhonesTreeSet.add(new CellPhones(1, 11111, 1000, 10, 20, "Samsung Galaxy A51", "Samsung", 128, 6.0, 6500, 64, "Black"));
         cellPhonesTreeSet.add(new CellPhones(2, 22222, 2000, 20, 30, "iPhone 11\t\t", "Apple\t", 512, 6.2, 4500, 64, "Silver"));
         cellPhonesTreeSet.add(new CellPhones(3, 33333, 3000, 30, 40, "Huawei Mate 40 Pro", "Huawei", 256, 5.8, 5000, 64, "Yellow"));
         cellPhonesTreeSet.add(new CellPhones(4, 44444, 4000, 40, 50, "Redmi Note 12 Pro", "Xiaomi", 128, 5.5, 6000, 64, "Green"));
 
-        //Iterator<CellPhones> iterator = cellPhonesTreeSet.iterator();
+        return cellPhonesTreeSet;
+    }
+    public void cellPhoneListsPrint(TreeSet<CellPhones> cellPhones) {
+        System.out.println("Cep Telefonu Listesi");
         System.out.println("-----------------------------------------------------------------------------------------------------------------------------");
         System.out.println("| ID |\tÜrün Adı\t\t\t\t\t| Fiyat\t\t\t| Marka\t\t| Depolama\t | Ekran\t| Pil\t\t| RAM\t\t| Renk \t\t|");
         System.out.println("-----------------------------------------------------------------------------------------------------------------------------");
@@ -100,14 +101,17 @@ public class Operations {
         }
         System.out.println("-----------------------------------------------------------------------------------------------------------------------------");
     }
-
-    public void notebookLists() {
-        System.out.println("Notebook listemiz!!!");
-
+    public TreeSet<Notebooks> notebookLists() {
         notebooksTreeSet.add(new Notebooks(1, 11111, "LENOVO V14 IGL", 3000, 10, "Lenevo", 8, 512, 14.0));
         notebooksTreeSet.add(new Notebooks(2, 22222, "ASUS Tuf Gaming",4000, 20, "Asus\t", 16, 512, 14.0));
         notebooksTreeSet.add(new Notebooks(3, 33333, "HUAWEI Matebook",5000, 30, "Huawei", 8, 512, 14.0));
         notebooksTreeSet.add(new Notebooks(4, 44444, "Macbook Pro 14",6000, 40, "Apple\t", 32, 512, 14.0));
+
+        return notebooksTreeSet;
+    }
+
+    public void notebookListsPrint(TreeSet<Notebooks> notebooks) {
+        System.out.println("Notebook listemiz!!!");
 
         System.out.println("---------------------------------------------------------------------------------------------");
         System.out.println("| ID |\tÜrün Adı\t\t\t\t| Fiyat\t\t\t| Marka\t\t| Depolama\t | Ekran\t| RAM\t|");
@@ -119,7 +123,6 @@ public class Operations {
         }
         System.out.println("---------------------------------------------------------------------------------------------");
     }
-
     public CellPhones cellPhoneAdd(){
         System.out.print("Lütfen Ürün ID giriniz: ");
         int phoneID = scanner.nextInt();
@@ -246,10 +249,10 @@ public class Operations {
                     kosul = false;
                     break;
                 case 1:
-                    cellPhonesLists();
+                    cellPhoneListsPrint(cellPhonesLists());
                     break;
                 case 2:
-                    notebookLists();
+                    notebookListsPrint(notebookLists());
                     break;
                 default:
                     System.out.println("Lütfen geçerli bir değer giriniz!!!");
@@ -274,8 +277,15 @@ public class Operations {
                     System.out.println("İşlem iptal edildi!!!");
                     break;
                 case 1:
-                    System.out.println("Cep Telefonlarından silme işlemi yapılacak");
-                    System.out.println("Ürün silme işlemi gerçekleşti!!!");
+                    cellPhonesLists();
+                    System.out.print("Lütfen silmek istediğiniz ürünün IMEI numarasını giriniz: ");
+                    int phoneIMEI = scanner.nextInt();
+                    if (deleteCellPhone(phoneIMEI)!= null) {
+                        cellPhonesTreeSet.remove(deleteCellPhone(phoneIMEI));
+                        System.out.println("Ürün silme işlemi gerçekleşti!!!");
+                    } else {
+                        System.out.println("Böyle bir IMEI numaralı ürün bulunmamaktadır. Lütfen IMEI numarasını kontrol ediniz!!");
+                    }
                     break;
                 case 2:
                     System.out.println("Notebooklardan silme işlemi yapılacak");
@@ -287,6 +297,17 @@ public class Operations {
             }
             kosul = false;
         }
+    }
+
+    public CellPhones deleteCellPhone(int phoneIMEI) {
+        CellPhones cellPhone = null;
+        for (CellPhones CP : cellPhonesTreeSet) {
+            if (CP.getPhoneIMEI() == phoneIMEI) {
+                cellPhone = CP;
+                System.out.println("Silinen ürün: " + cellPhone.getPhoneName());
+            }
+        }
+        return cellPhone;
     }
 /*
     public void productCategoriesList(){
