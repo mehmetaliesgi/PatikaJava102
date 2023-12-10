@@ -283,17 +283,19 @@ public class Operations {
                     if (deleteCellPhone(phoneIMEI) != null) {
                         cellPhonesTreeSet.remove(deleteCellPhone(phoneIMEI));
                         System.out.println("Ürün silme işlemi gerçekleşti!!!");
+                        System.out.println("Silinen ürün: " + deleteCellPhone(phoneIMEI).getPhoneName() + ", IMEI no: " + deleteCellPhone(phoneIMEI).getPhoneIMEI());
                     } else {
                         System.out.println("Böyle bir IMEI numaralı ürün bulunmamaktadır. Lütfen IMEI numarasını kontrol ediniz!!");
                     }
                     break;
                 case 2:
                     notebookLists();
-                    System.out.println("Lütfen silmek istediğiniz ürünün IMEI numarasını giriniz: ");
+                    System.out.print("Lütfen silmek istediğiniz ürünün IMEI numarasını giriniz: ");
                     int notebookIMEI = scanner.nextInt();
                     if (deleteNotebook(notebookIMEI) != null) {
                         notebooksTreeSet.remove(deleteNotebook(notebookIMEI));
                         System.out.println("Ürün silme işlemi gerçekleştirildi!!!");
+                        System.out.println("Silinen ürün: " + deleteNotebook(notebookIMEI).getNotebookName() + ", IMEI no: " + deleteNotebook(notebookIMEI).getNotebookIMEI());
                     } else {
                         System.out.println("Böyle bir IMEI numaralı ürün bulunmamaktadır. Lütfen IMEI numarasını kontrol ediniz!!");
                     }
@@ -311,7 +313,6 @@ public class Operations {
         for (CellPhones CP : cellPhonesTreeSet) {
             if (CP.getPhoneIMEI() == phoneIMEI) {
                 cellPhone = CP;
-                System.out.println("Silinen ürün: " + cellPhone.getPhoneName() + ", IMEI no: " + cellPhone.getPhoneIMEI());
             }
         }
         return cellPhone;
@@ -322,10 +323,66 @@ public class Operations {
         for (Notebooks nb : notebooksTreeSet) {
             if (nb.getNotebookIMEI() == notebookIMEI) {
                 notebook = nb;
-                System.out.println("Silinen ürün: " + notebook.getNotebookName() + ", IMEI no: " + notebook.getNotebookIMEI());
             }
         }
         return notebook;
+    }
+
+    public CellPhones searchCellPhone(int productIMEI) {
+        CellPhones cp = null;
+        for (CellPhones cellPhone : cellPhonesTreeSet) {
+            if (cellPhone.getPhoneIMEI() == productIMEI) {
+                cp = cellPhone;
+                break;
+            }
+        }
+        return cp;
+    }
+
+    public Notebooks searchNotebook(int productIMEI) {
+        Notebooks nb = null;
+        for (Notebooks notebook : notebooksTreeSet) {
+            if (notebook.getNotebookIMEI() == productIMEI) {
+                nb = notebook;
+                break;
+            }
+        }
+        return nb;
+    }
+
+    public void productSearch() {
+        boolean kosul = true;
+        cellPhonesLists();
+        notebookLists();
+        while (kosul) {
+            System.out.println("1 - Arama Yap!!");
+            System.out.println("0 - Çıkış");
+
+            System.out.println("Lütfen işlem tipi seçiniz: ");
+            int choose = scanner.nextInt();
+
+            switch (choose) {
+                case 0:
+                    System.out.println("Arama işlemi sayfasından çıkış yapıldı!!!");
+                    kosul = false;
+                    break;
+
+                case 1:
+                    System.out.print("Lütfen ürünün IMEI numarasını giriniz: ");
+                    int productIMEI = scanner.nextInt();
+
+                    if (searchCellPhone(productIMEI) != null) {
+                        System.out.println("Aradığınız ürün: " + searchCellPhone(productIMEI).getPhoneName());
+                    } else if (searchNotebook(productIMEI) != null) {
+                        System.out.println("Aradığınız ürün: " + searchNotebook(productIMEI).getNotebookName());
+                    } else {
+                        System.out.println(productIMEI + " numaralı bir ürününüz bulunmamaktadır.");
+                    }
+                    break;
+                default:
+                    System.out.println("Lütfen geçerli bir değer giriniz!!!");
+            }
+        }
     }
 /*
     public void productCategoriesList(){
