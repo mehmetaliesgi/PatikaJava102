@@ -11,8 +11,8 @@ public class PatikaStore {
         System.out.println("Patika Store Ürün Yönetim Paneline Hoş Geldiniz!!!");
 
         LinkedList<OperationsLists> operationsLinkedList = new LinkedList<>();
-        operationsLinkedList.add(new OperationsLists(1, "Notebookları Listele"));
-        operationsLinkedList.add(new OperationsLists(2, "Cep Telefonlarını Listele"));
+        operationsLinkedList.add(new OperationsLists(1, "Ürünleri Listele"));
+        //operationsLinkedList.add(new OperationsLists(2, "Cep Telefonlarını Listele"));
         operationsLinkedList.add(new OperationsLists(3, "Marka Listele"));
         operationsLinkedList.add(new OperationsLists(4, "Marka Ekle"));
         operationsLinkedList.add(new OperationsLists(5, "Ürün Ekle"));
@@ -36,7 +36,7 @@ public class PatikaStore {
                     kosul = false;
                     break;
                 case 1:
-                    operations.notebookLists();
+                    operations.productLists();
                     break;
                 case 2:
                     operations.cellPhonesLists();
@@ -47,6 +47,8 @@ public class PatikaStore {
                     }
                     break;
                 case 4:
+                    System.out.println("Markalarımız");
+                    System.out.println("-------------------------------------");
                     operations.brandAdd();
                     break;
                 case 5:

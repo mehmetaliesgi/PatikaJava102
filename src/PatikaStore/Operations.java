@@ -22,8 +22,6 @@ public class Operations {
     });
     public TreeSet<Brands> brandsLists() {
         //Samsung, Lenovo, Apple, Huawei, Casper, Asus, HP, Xiaomi, Monster
-        System.out.println("Markalarımız");
-        System.out.println("-------------------------------------");
         brandsTreeSet.add(new Brands(1, "Samsung"));
         brandsTreeSet.add(new Brands(2, "Lenovo"));
         brandsTreeSet.add(new Brands(3, "Apple"));
@@ -127,13 +125,15 @@ public class Operations {
         System.out.print("Ürün IMEI numarasını giriniz: ");
         int phoneIMEI = scanner.nextInt();
         System.out.print("Ürün fiyarını giriniz: ");
+        scanner.nextLine();
         double phonePrice = scanner.nextDouble();
         System.out.print("Ürün indirimini giriniz: ");
         double phoneDiscount = scanner.nextDouble();
         System.out.print("Stoğa kaç ürün eklenecek: ");
         int phoneStockCount = scanner.nextInt();
         System.out.print("Ürün ismini giriniz: ");
-        String phoneName = scanner.next();
+        scanner.nextLine();
+        String phoneName = scanner.nextLine();
         System.out.print("Ürün markasını giriniz: ");
         //brandsLists();
         String phoneBrand = scanner.next();
@@ -155,24 +155,54 @@ public class Operations {
                 break;
             } else {
                 System.out.println("Lütfen aşağıdaki markadalardan birini giriniz: ");
-                brandsLists();
+                for (Brands brand : brandsLists()) {
+                    System.out.println(" - " + brand.getBrandsName());
+                }
                 System.out.print("Ürün markasını giriniz: ");
                 phoneBrand = scanner.next();
             }
         }
-        System.out.print("Lütfen ürün hafıza kapasitesini giriniz: Örnek: 32");
+        System.out.print("Lütfen ürün hafıza kapasitesini giriniz: ");
         int phoneMemory = scanner.nextInt();
-        System.out.print("Lütfen ürün ekran boyutunu giriniz: Örnek: 6.1");
-        double phoneScreenSize = scanner.nextInt();
+        System.out.print("Lütfen ürün ekran boyutunu giriniz: ");
+        double phoneScreenSize = scanner.nextDouble();
         System.out.print("Lütfen batarya kapasitesini giriniz: ");
         int phoneBattary = scanner.nextInt();
-        System.out.print("Lütfen telefon RAM bilgisini giriniz: Örnek: 6");
+        System.out.print("Lütfen telefon RAM bilgisini giriniz: ");
         int phoneRAM = scanner.nextInt();
         System.out.print("Lütfen telefon rengini giriniz: ");
         String phoneColor = scanner.next();
 
         CellPhones cellPhone = new CellPhones(phoneID, phoneIMEI, phonePrice, phoneDiscount, phoneStockCount, phoneName, phoneBrand, phoneMemory, phoneScreenSize, phoneBattary, phoneRAM, phoneColor);
         return cellPhone;
+    }
+
+    public void productLists() {
+
+        boolean kosul = true;
+        while (kosul) {
+            for (ProductCategories productCategory : ProductCategories.productCategories()) {
+                System.out.println(productCategory.getProductCategoriesID() + " - " + productCategory.getProductCategoriesName());
+            }
+            System.out.println("0 - Çıkış");
+            System.out.print("Lütfen seçiminizi yapınız: ");
+            int choose = scanner.nextInt();
+
+            switch (choose) {
+                case 0:
+                    System.out.println("Ürün listeleme ekranından çıktınız!!!");
+                    kosul = false;
+                    break;
+                case 1:
+                    cellPhonesLists();
+                    break;
+                case 2:
+                    notebookLists();
+                    break;
+                default:
+                    System.out.println("Lütfen geçerli bir değer giriniz!!!");
+            }
+        }
     }
 /*
     public void productCategoriesList(){
