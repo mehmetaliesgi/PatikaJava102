@@ -280,7 +280,7 @@ public class Operations {
                     cellPhonesLists();
                     System.out.print("Lütfen silmek istediğiniz ürünün IMEI numarasını giriniz: ");
                     int phoneIMEI = scanner.nextInt();
-                    if (deleteCellPhone(phoneIMEI)!= null) {
+                    if (deleteCellPhone(phoneIMEI) != null) {
                         cellPhonesTreeSet.remove(deleteCellPhone(phoneIMEI));
                         System.out.println("Ürün silme işlemi gerçekleşti!!!");
                     } else {
@@ -288,8 +288,15 @@ public class Operations {
                     }
                     break;
                 case 2:
-                    System.out.println("Notebooklardan silme işlemi yapılacak");
-                    System.out.println("Ürün silme işlemi gerçekleşti!!!");
+                    notebookLists();
+                    System.out.println("Lütfen silmek istediğiniz ürünün IMEI numarasını giriniz: ");
+                    int notebookIMEI = scanner.nextInt();
+                    if (deleteNotebook(notebookIMEI) != null) {
+                        notebooksTreeSet.remove(deleteNotebook(notebookIMEI));
+                        System.out.println("Ürün silme işlemi gerçekleştirildi!!!");
+                    } else {
+                        System.out.println("Böyle bir IMEI numaralı ürün bulunmamaktadır. Lütfen IMEI numarasını kontrol ediniz!!");
+                    }
                     break;
                 default:
                     System.out.print("Yanlış bir değer girdiniz. Lütfen tekrar deneyiniz!!! ");
@@ -304,10 +311,21 @@ public class Operations {
         for (CellPhones CP : cellPhonesTreeSet) {
             if (CP.getPhoneIMEI() == phoneIMEI) {
                 cellPhone = CP;
-                System.out.println("Silinen ürün: " + cellPhone.getPhoneName());
+                System.out.println("Silinen ürün: " + cellPhone.getPhoneName() + ", IMEI no: " + cellPhone.getPhoneIMEI());
             }
         }
         return cellPhone;
+    }
+
+    public Notebooks deleteNotebook(int notebookIMEI) {
+        Notebooks notebook = null;
+        for (Notebooks nb : notebooksTreeSet) {
+            if (nb.getNotebookIMEI() == notebookIMEI) {
+                notebook = nb;
+                System.out.println("Silinen ürün: " + notebook.getNotebookName() + ", IMEI no: " + notebook.getNotebookIMEI());
+            }
+        }
+        return notebook;
     }
 /*
     public void productCategoriesList(){
