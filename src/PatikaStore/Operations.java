@@ -42,8 +42,7 @@ public class Operations {
         return brandsTreeSet;
     }
 
-    public void brandAdd()
-    {
+    public void brandAdd() {
         System.out.println("Marka Ekle: ");
         System.out.print("Marka Id Giriniz: ");
         int brandId = scanner.nextInt();
@@ -255,6 +254,38 @@ public class Operations {
                 default:
                     System.out.println("Lütfen geçerli bir değer giriniz!!!");
             }
+        }
+    }
+
+    public void productDelete() {
+        System.out.println("Hangi kategoriden ürün silmek istersiniz? ");
+        for (ProductCategories productCategory : ProductCategories.productCategories()) {
+            System.out.println(productCategory.getProductCategoriesID() + " - " + productCategory.getProductCategoriesName());
+        }
+        System.out.println("0 - İptal");
+
+        System.out.print("Lütfen seçinizi yapınız: ");
+        int choose = scanner.nextInt();
+
+        boolean kosul = true;
+        while (kosul) {
+            switch (choose) {
+                case 0:
+                    System.out.println("İşlem iptal edildi!!!");
+                    break;
+                case 1:
+                    System.out.println("Cep Telefonlarından silme işlemi yapılacak");
+                    System.out.println("Ürün silme işlemi gerçekleşti!!!");
+                    break;
+                case 2:
+                    System.out.println("Notebooklardan silme işlemi yapılacak");
+                    System.out.println("Ürün silme işlemi gerçekleşti!!!");
+                    break;
+                default:
+                    System.out.print("Yanlış bir değer girdiniz. Lütfen tekrar deneyiniz!!! ");
+                    choose = scanner.nextInt();
+            }
+            kosul = false;
         }
     }
 /*
