@@ -16,6 +16,6 @@ public class BusinessAddress implements IAddress{
 
     @Override
     public String toString() {
-        return addressName + "(Business Address)\n" + address;
+        return addressName + "(Business Address)\n" + "\t" + address;
     }
 }

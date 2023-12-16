@@ -11,28 +11,37 @@ public class AddressManager {
         String addressName;
         String address;
 
-        System.out.println("1 - Home Address \n2 - Bussiness Address");
-        System.out.print("Lütfen adress tipini seçiniz: ");
-        int choose = scanner.nextInt();
-
-        scanner.nextLine();
-        System.out.print("Lütfen adres ismini giriniz: ");
-        addressName = scanner.nextLine();
-        System.out.print("Lütfen tam adresi giriniz: ");
-        address = scanner.nextLine();
-
-        switch (choose) {
-            case 1:
-                addresses.add(new HomeAddress(addressName, address));
-                break;
-            case 2:
-                addresses.add(new BusinessAddress(addressName, address));
-                break;
-            default:
-                System.out.println("Lütfen geçerli bir değer giriniz!!!");
+        boolean kosul = true;
+        while (kosul) {
+            System.out.println("\n1 - Home Address \n2 - Bussiness Address\n3 - Adres İşlemleri Çıkış");
+            System.out.print("Lütfen adress tipini seçiniz: ");
+            int choose = scanner.nextInt();
+            switch (choose) {
+                case 1:
+                    scanner.nextLine();
+                    System.out.print("Lütfen adres ismini giriniz: ");
+                    addressName = scanner.nextLine();
+                    System.out.print("Lütfen tam adresi giriniz: ");
+                    address = scanner.nextLine();
+                    addresses.add(new HomeAddress(addressName, address));
+                    break;
+                case 2:
+                    scanner.nextLine();
+                    System.out.print("Lütfen adres ismini giriniz: ");
+                    addressName = scanner.nextLine();
+                    System.out.print("Lütfen tam adresi giriniz: ");
+                    address = scanner.nextLine();
+                    addresses.add(new BusinessAddress(addressName, address));
+                    break;
+                case 3:
+                    System.out.println("Adres ekleme işleminden çıkış yapıldı!!");
+                    kosul = false;
+                    break;
+                default:
+                    System.out.println("Lütfen geçerli bir değer giriniz!!!");
+            }
+            reListAddresses(addresses);
         }
-
-        reListAddresses(addresses);
     }
 
     public static void deleteAddress(ArrayList<IAddress> addresses) {
@@ -55,6 +64,7 @@ public class AddressManager {
         for (IAddress address : addresses) {
             System.out.println(++i + " - " + address.toString());
         }
+        System.out.println("-----------------------------------------------");
     }
     public static void reListAddresses(ArrayList<IAddress> addresses) {
         addresses.sort(new Comparator<IAddress>() {

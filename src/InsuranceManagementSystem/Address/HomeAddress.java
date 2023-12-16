@@ -16,6 +16,6 @@ public class HomeAddress implements IAddress{
 
     @Override
     public String toString() {
-        return addressName + "(Home Address)\n" + address;
+        return addressName + "(Home Address)\n" + "\t" + address;
     }
 }
