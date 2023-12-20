@@ -1,14 +1,14 @@
 package InsuranceManagementSystem.Insurance;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public abstract class Insurance {
     String insuranceName;
     double insurancePrice;
-    Date insuranceStartDate;
-    Date InsuranceFinishDate;
+    LocalDate insuranceStartDate;
+    LocalDate InsuranceFinishDate;
 
-    public Insurance(String insuranceName, double insurancePrice, Date insuranceStartDate, Date insuranceFinishDate) {
+    public Insurance(String insuranceName, double insurancePrice, LocalDate insuranceStartDate, LocalDate insuranceFinishDate) {
         this.insuranceName = insuranceName;
         this.insurancePrice = insurancePrice;
         this.insuranceStartDate = insuranceStartDate;
@@ -24,11 +24,11 @@ public abstract class Insurance {
         return insurancePrice;
     }
 
-    public Date getInsuranceStartDate() {
+    public LocalDate getInsuranceStartDate() {
         return insuranceStartDate;
     }
 
-    public Date getInsuranceFinishDate() {
+    public LocalDate getInsuranceFinishDate() {
         return InsuranceFinishDate;
     }
 }

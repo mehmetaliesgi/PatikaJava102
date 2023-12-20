@@ -4,13 +4,25 @@ import InsuranceManagementSystem.Address.AddressManager;
 import InsuranceManagementSystem.Address.IAddress;
 import InsuranceManagementSystem.Exceptions.InvalidAuthenticationException;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class AccountManager {
     public static Scanner scanner = new Scanner(System.in);
-    TreeSet<Account> accounts = new TreeSet<>();
-    static ArrayList<User> users = new ArrayList<>();
-
+    static TreeSet<Account> accounts = new TreeSet<>(new Comparator<Account>() {
+        @Override
+        public int compare(Account o1, Account o2) {
+            return o1.compareTo(o2);
+        }
+    });
+    static TreeSet<User> users = new TreeSet<>(new Comparator<User>() {
+        @Override
+        public int compare(User o1, User o2) {
+            return o1.getName().compareTo(o2.getName());
+        }
+    });
     static ArrayList<IAddress> addresses = new ArrayList<>();
     private static AuthenticationStatus isLogin = AuthenticationStatus.FAIL;
     private static User userL;
@@ -35,6 +47,24 @@ public class AccountManager {
         Date firstDate = new Date();
         User user = new User(name, surname, email, password, job, age, addresses, firstDate);
         users.add(user);
+
+        boolean kosul = true;
+        while (kosul) {
+            System.out.println("Hangi tür müşterisiniz: \n1- Kurumsal \n2- Bireysel");
+            int choose = scanner.nextInt();
+            switch (choose) {
+                case 1:
+                    accounts.add(new Enterprise(user));
+                    kosul = false;
+                    break;
+                case 2:
+                    accounts.add(new Individual(user));
+                    kosul = false;
+                    break;
+                default:
+                    System.out.println("Lütfen geçerli bir işlem seçiniz!!!");
+            }
+        }
     }
 
     public static void login() throws InvalidAuthenticationException {
@@ -63,7 +93,8 @@ public class AccountManager {
             System.out.println("Sayın "+ userL.getName()+" Hoşgeldiniz!!!! " +
                     "\n1 - Kullanıcı Bilgilerini Göster" +
                     "\n2 - Adres İşlemlerim" +
-                    "\n3 - Çıkış Yap");
+                    "\n3 - Sigorta İşlemlerim" +
+                    "\n4 - Çıkış Yap");
             System.out.print("Lütfen İşlem Türü Seçiniz: ");
             int choose = scanner.nextInt();
             switch (choose) {
@@ -74,6 +105,9 @@ public class AccountManager {
                     updateAddress();
                     break;
                 case 3:
+                    insuranceOperations();
+                    break;
+                case 4:
                     logout();
                     System.out.println("Çıkış Yaptınız!!!");
                     kosul = false;
@@ -123,13 +157,45 @@ public class AccountManager {
                     kosul = false;
                     break;
                 default:
-                    System.out.println("Lürfen geçerli işlem giriniz!!!");
+                    System.out.println("Lütfen geçerli işlem giriniz!!!");
             }
         }
     }
     public static void listUsers() {
-        for (User user: users) {
+        for (User user : users) {
             System.out.println("Usar Name: " + user.getName());
         }
+
+        for (Account account : accounts) {
+            System.out.println("Account Type: " +account + "\n***************************");
+        }
     }
+
+    public static void insuranceOperations() {
+        boolean kosul = true;
+        while (kosul) {
+            System.out.println("Yapabileceğiniz işlemler " +
+                    "\n1 - Sigortalarımı Listele" +
+                    "\n2 - Sigorta Ekle" +
+                    "\n3 - Çıkış Yap" +
+                    "\nLütfen işlem seçiniz: ");
+            int choose = scanner.nextInt();
+            switch (choose) {
+                case 1:
+                    Account.listInsurance();
+                    break;
+                case 2:
+                    Account.addInsurance();
+                    break;
+                case 3:
+                    System.out.println("Sigorta işlemlerinden çıkış yaptınız!!!");
+                    kosul = false;
+                    break;
+                default:
+                    System.out.println("Lütfen Geçerli Bir İşlem Seçiniz!!!");
+            }
+        }
+    }
+
+
 }

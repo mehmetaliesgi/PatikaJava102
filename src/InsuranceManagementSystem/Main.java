@@ -38,7 +38,6 @@ public class Main {
                     }
                     break;
                 case 2:
-                    System.out.println("Yeni hesap oluşturmaya gidecek");
                     AccountManager.createAccount();
                     AccountManager.listUsers();
                     break;

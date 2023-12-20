@@ -1,14 +1,14 @@
 package InsuranceManagementSystem.Insurance;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class ResidenceInsurance extends Insurance{
-    public ResidenceInsurance(String insuranceName, double insurancePrice, Date insuranceStartDate, Date insuranceFinishDate) {
+    public ResidenceInsurance(String insuranceName, double insurancePrice, LocalDate insuranceStartDate, LocalDate insuranceFinishDate) {
         super(insuranceName, insurancePrice, insuranceStartDate, insuranceFinishDate);
     }
 
     @Override
     public double calculate() {
-        return 0;
+        return insurancePrice * 1.4;
     }
 }
