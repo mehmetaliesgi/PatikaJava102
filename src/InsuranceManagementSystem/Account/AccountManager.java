@@ -165,10 +165,6 @@ public class AccountManager {
         for (User user : users) {
             System.out.println("Usar Name: " + user.getName());
         }
-
-        for (Account account : accounts) {
-            System.out.println("Account Type: " +account + "\n***************************");
-        }
     }
 
     public static void insuranceOperations() {
