@@ -1,0 +1,2 @@
+Bu dosya buffered stream sinifini incelemek icin olusturulmustur.
+Deneme txt dosyasi.Bu bir deneme BufferedOutputStream ornegidir.
