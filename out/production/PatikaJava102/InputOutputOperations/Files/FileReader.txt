@@ -1,2 +1,3 @@
 Java 102 Öğreniyorum.
 Eğitimi Patika.Dev internet sitesi üzerinden alıyorum.
+Bu datayı FileWriter sınıfından nesne üretilerek dosyaya yazılmıştır.
