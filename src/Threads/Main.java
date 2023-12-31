@@ -15,10 +15,26 @@ public class Main {
 
         */
 
+/*
         Counter counter1 = new Counter("Counter 1");
         Counter counter2 = new Counter("Counter 2");
 
         counter1.start();
         counter2.start();
+*/
+
+
+        CounterWithRunnable c1 = new CounterWithRunnable("C1");
+        CounterWithRunnable c2 = new CounterWithRunnable("C2");
+        CounterWithRunnable c3 = new CounterWithRunnable("C3");
+
+        Thread t1 = new Thread(c1);
+        Thread t2 = new Thread(c2);
+        Thread t3 = new Thread(c3);
+
+
+        t1.start();
+        t2.start();
+        t3.start();
     }
 }
