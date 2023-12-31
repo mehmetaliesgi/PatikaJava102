@@ -23,7 +23,7 @@ public class Main {
         counter2.start();
 */
 
-
+/*
         CounterWithRunnable c1 = new CounterWithRunnable("C1");
         CounterWithRunnable c2 = new CounterWithRunnable("C2");
         CounterWithRunnable c3 = new CounterWithRunnable("C3");
@@ -36,5 +36,14 @@ public class Main {
         t1.start();
         t2.start();
         t3.start();
+*/
+
+        ThreadSleep ts1 = new ThreadSleep("C1", 1);
+        Thread t1 = new Thread(ts1);
+        t1.start();
+
+        ThreadSleep ts2 = new ThreadSleep("C2", 5);
+        Thread t2 = new Thread(ts2);
+        t2.start();
     }
 }
