@@ -12,7 +12,7 @@ public class Main {
         HashMap <String, String> bookNameAndAuthor = new HashMap<>();
         ArrayList <Book> moreThan100Page = new ArrayList<>();
 
-        for (int i = 1; i <= 4; i++) {
+        for (int i = 1; i <= 10; i++) {
             System.out.print("Lütfen " + i + ". kitap ismini giriniz: ");
             String bookName = scanner.next();
             System.out.print("Lütfen " + bookName + " kitabının sayfa sayısını giriniz: ");
