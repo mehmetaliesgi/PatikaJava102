@@ -14,7 +14,7 @@ public class Example extends JFrame {
     private JButton btnLogin;
 
     public Example() {
-        /* Bu şekilde kullanabileceğimiz temaları öğrenebiliriz
+        /* Bu şekilde kullanabileceğimiz temaları öğrenebiliriz */
         for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
             System.out.println(info.getName() + " --> " + info.getClassName());
         }
@@ -29,7 +29,7 @@ public class Example extends JFrame {
             throw new RuntimeException(e);
         } catch (UnsupportedLookAndFeelException e) {
             throw new RuntimeException(e);
-        }*/
+        }
         add(wrapper);
         setSize(600,350);
         setTitle("Uygulama Adi");
