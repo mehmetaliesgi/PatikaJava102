@@ -2,9 +2,7 @@ package com.patikadev.Model;
 
 import com.patikadev.Helper.DBConnector;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class User {
@@ -85,5 +83,23 @@ public class User {
             throw new RuntimeException(e);
         }
         return userList;
+    }
+
+    public static boolean addUser(String name, String username, String password, String userType) {
+        String query = "INSERT INTO users (name, username, password, \"userType\") VALUES (?, ?, ?, ?)";
+        boolean result = false;
+
+        try {
+            PreparedStatement preparedStatement = DBConnector.getInstance().prepareStatement(query);
+            preparedStatement.setString(1, name);
+            preparedStatement.setString(2, username);
+            preparedStatement.setString(3, password);
+            preparedStatement.setObject(4, userType, Types.OTHER);
+            result = preparedStatement.executeUpdate() != -1;
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return result;
     }
 }

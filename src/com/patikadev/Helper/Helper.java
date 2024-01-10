@@ -1,5 +1,6 @@
 package com.patikadev.Helper;
 
+import javax.swing.*;
 import java.awt.*;
 
 public class Helper {
@@ -17,5 +18,44 @@ public class Helper {
                 point = 0;
         }
         return point;
+    }
+
+    public static boolean isFieldEmpty(JTextField textField) {
+
+        return textField.getText().trim().isEmpty();
+    }
+
+    public static void showMessage(String str) {
+        optionPageTR();
+        String mesaj;
+        String title;
+
+        switch (str) {
+            case "fill":
+                mesaj = "Lütfen tüm alanları doldurunuz!";
+                title = "Hata!";
+                break;
+            case "done":
+                mesaj = "İşlemi başarılı!";
+                title = "Başarılı";
+                break;
+            case "error":
+                mesaj = "Bir hata oluştu!";
+                title = "Hata!";
+                break;
+            default:
+                mesaj = str;
+                title = "Mesaj";
+        }
+        if (str.equals("error")) {
+            JOptionPane.showMessageDialog(null, mesaj, title, JOptionPane.ERROR_MESSAGE);
+        }
+        else {
+            JOptionPane.showMessageDialog(null, mesaj, title, JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+
+    public static void optionPageTR() {
+        UIManager.put("OptionPane.okButtonText", "Tamam");
     }
 }

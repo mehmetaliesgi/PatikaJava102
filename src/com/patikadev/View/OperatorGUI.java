@@ -18,6 +18,16 @@ public class OperatorGUI extends JFrame {
     private JScrollPane scrlUserList;
     private JTable tblUserList;
     private JButton btnTheme;
+    private JPanel pnlUserForm;
+    private JLabel lbAdSoyad;
+    private JTextField fldName;
+    private JLabel lbKullaniciAdi;
+    private JTextField fldUserName;
+    private JLabel lbPassword;
+    private JTextField fldPassword;
+    private JLabel lbUyelikTipi;
+    private JComboBox cmbUsetType;
+    private JButton btnUserSubmit;
     private DefaultTableModel mdlUserList;  // Tabloda veri tutmak için gerekli olan değişken tanımlandı.
     private Object[] rowUserList;
 
@@ -58,6 +68,26 @@ public class OperatorGUI extends JFrame {
 
         tblUserList.setModel(mdlUserList);
         tblUserList.getTableHeader().setReorderingAllowed(false);
+
+        btnUserSubmit.addActionListener(e -> {
+            if (Helper.isFieldEmpty(fldName) || Helper.isFieldEmpty(fldUserName) || Helper.isFieldEmpty(fldPassword) || cmbUsetType.getSelectedItem().equals("")) {
+                Helper.showMessage("fill");
+            }
+            else {
+                String name = fldName.getText();
+                String username = fldUserName.getText();
+                String password = fldPassword.getText();
+                String userType = cmbUsetType.getSelectedItem().toString();
+                System.out.println(userType);
+                if (User.addUser(name, username, password, userType)) {
+                    Helper.showMessage("done");
+                }
+                else {
+                    Helper.showMessage("error");
+                }
+
+            }
+        });
     }
 
 
