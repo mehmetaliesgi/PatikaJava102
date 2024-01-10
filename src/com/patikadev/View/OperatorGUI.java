@@ -50,21 +50,12 @@ public class OperatorGUI extends JFrame {
         mdlUserList = new DefaultTableModel();
         Object[] colUserList = {"id", "Ad Soyad", "Kullanici Adi", "Sifre", "Uyelik Tipi"};
         mdlUserList.setColumnIdentifiers(colUserList);
+        rowUserList = new Object[colUserList.length];
         /*
         Object[] firstRow = {1, "Ali Kalander", "alikalender", "123456", "OPERATOR"};
         mdlUserList.addRow(firstRow);
          */
-
-        for (User obj : User.getList()) {
-            Object[] row = new Object[colUserList.length];
-            row[0] = obj.getId();
-            row[1] = obj.getName();
-            row[2] = obj.getUsername();
-            row[3] = obj.getPassword();
-            row[4] = obj.getUserType();
-
-            mdlUserList.addRow(row);
-        }
+        loadUserModel();
 
         tblUserList.setModel(mdlUserList);
         tblUserList.getTableHeader().setReorderingAllowed(false);
@@ -78,9 +69,10 @@ public class OperatorGUI extends JFrame {
                 String username = fldUserName.getText();
                 String password = fldPassword.getText();
                 String userType = cmbUsetType.getSelectedItem().toString();
-                System.out.println(userType);
+
                 if (User.addUser(name, username, password, userType)) {
                     Helper.showMessage("done");
+                    loadUserModel();
                 }
                 else {
                     Helper.showMessage("error");
@@ -90,7 +82,21 @@ public class OperatorGUI extends JFrame {
         });
     }
 
+    public void loadUserModel() {
+        DefaultTableModel clearModel = (DefaultTableModel) tblUserList.getModel();
+        clearModel.setRowCount(0);
 
+        for (User obj : User.getList()) {
+            int i = 0;
+            rowUserList[i++] = obj.getId();
+            rowUserList[i++] = obj.getName();
+            rowUserList[i++] = obj.getUsername();
+            rowUserList[i++] = obj.getPassword();
+            rowUserList[i++] = obj.getUserType();
+
+            mdlUserList.addRow(rowUserList);
+        }
+    }
 
 
 
