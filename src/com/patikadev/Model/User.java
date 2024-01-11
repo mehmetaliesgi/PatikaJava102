@@ -1,6 +1,7 @@
 package com.patikadev.Model;
 
 import com.patikadev.Helper.DBConnector;
+import com.patikadev.Helper.Helper;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -88,6 +89,11 @@ public class User {
     public static boolean addUser(String name, String username, String password, String userType) {
         String query = "INSERT INTO users (name, username, password, \"userType\") VALUES (?, ?, ?, ?)";
         boolean result = false;
+        User findUser = User.getFetch(username);
+        if (findUser != null) {
+            Helper.showMessage("Bu kullanıcı adı daha önceden eklenmiş. Lütfen farklı bir kullanıcı adı giriniz.");
+            return false;
+        }
 
         try {
             PreparedStatement preparedStatement = DBConnector.getInstance().prepareStatement(query);
@@ -95,11 +101,39 @@ public class User {
             preparedStatement.setString(2, username);
             preparedStatement.setString(3, password);
             preparedStatement.setObject(4, userType, Types.OTHER);
+
             result = preparedStatement.executeUpdate() != -1;
+
+            if (result == false) {
+                Helper.showMessage("error");
+            }
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
         return result;
+    }
+
+    public static User getFetch(String username) {
+        User user = null;
+        String sql = "SELECT * FROM users WHERE username = ?";
+
+        try {
+            PreparedStatement preparedStatement = DBConnector.getInstance().prepareStatement(sql);
+            preparedStatement.setString(1, username);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                user = new User();
+                user.setId(resultSet.getInt("id"));
+                user.setName(resultSet.getString("name"));
+                user.setUsername(resultSet.getString("username"));
+                user.setPassword(resultSet.getString("password"));
+                user.setUserType(resultSet.getString("userType"));
+                preparedStatement.close();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return user;
     }
 }
