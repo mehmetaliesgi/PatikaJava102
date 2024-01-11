@@ -6,6 +6,8 @@ import com.patikadev.Model.Operator;
 import com.patikadev.Model.User;
 
 import javax.swing.*;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -79,6 +81,19 @@ public class OperatorGUI extends JFrame {
                 fldUserID.setText(selectUserID);
             } catch (Exception ex) {
 
+            }
+        });
+
+        tblUserList.getModel().addTableModelListener(e -> {
+            if (e.getType() == TableModelEvent.UPDATE) {
+                int userID = Integer.parseInt(tblUserList.getValueAt(tblUserList.getSelectedRow(), 0).toString());
+                String name = tblUserList.getValueAt(tblUserList.getSelectedRow(), 1).toString();
+                String userName = tblUserList.getValueAt(tblUserList.getSelectedRow(), 2).toString();
+                String password = tblUserList.getValueAt(tblUserList.getSelectedRow(), 3).toString();
+                String userType = tblUserList.getValueAt(tblUserList.getSelectedRow(), 4).toString();
+
+                User.updateUser(userID, name, userName, password, userType);
+                loadUserModel();
             }
         });
 

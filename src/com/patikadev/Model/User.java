@@ -3,6 +3,7 @@ package com.patikadev.Model;
 import com.patikadev.Helper.DBConnector;
 import com.patikadev.Helper.Helper;
 
+import java.lang.reflect.Type;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -149,5 +150,32 @@ public class User {
             throw new RuntimeException(e);
         }
         return result;
+    }
+
+    public static void updateUser(int userID, String name, String username, String password, String userType) {
+        String sql = "UPDATE users SET name = ?, username = ?, password = ?, \"userType\" = ? WHERE id = ?";
+
+        User findUser = User.getFetch(username);
+        if (findUser != null && findUser.getId() != userID) {
+            Helper.showMessage("Bu kullanıcı adı daha önceden eklenmiş. Lütfen farklı bir kullanıcı adı giriniz.");
+        } else {
+            try {
+                PreparedStatement preparedStatement = DBConnector.getInstance().prepareStatement(sql);
+                preparedStatement.setString(1, name);
+                preparedStatement.setString(2, username);
+                preparedStatement.setString(3, password);
+                preparedStatement.setObject(4, userType, Types.OTHER);
+                preparedStatement.setInt(5, userID);
+
+                if (userType.equals("OPERATOR") || userType.equals("EDUCATOR") || userType.equals("STUDENT")) {
+                    preparedStatement.executeUpdate();
+                    Helper.showMessage("done");
+                } else {
+                    Helper.showMessage("Üyelik tipi sadece OPERATOR, STUDENT veya EDUCATOR olabilir.");
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 }
