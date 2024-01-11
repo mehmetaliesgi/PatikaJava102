@@ -136,4 +136,18 @@ public class User {
         }
         return user;
     }
+
+    public static boolean deleteUser(int userID) {
+        String sql = "DELETE FROM users WHERE id = ?";
+
+        boolean result = false;
+        try {
+            PreparedStatement preparedStatement = DBConnector.getInstance().prepareStatement(sql);
+            preparedStatement.setInt(1, userID);
+            result = preparedStatement.executeUpdate() != -1;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return result;
+    }
 }

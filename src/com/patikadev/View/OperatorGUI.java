@@ -7,6 +7,8 @@ import com.patikadev.Model.User;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class OperatorGUI extends JFrame {
     private JPanel wrapper;
@@ -28,6 +30,9 @@ public class OperatorGUI extends JFrame {
     private JLabel lbUyelikTipi;
     private JComboBox cmbUsetType;
     private JButton btnUserSubmit;
+    private JLabel lblUserID;
+    private JTextField fldUserID;
+    private JButton btnDeleteUser;
     private DefaultTableModel mdlUserList;  // Tabloda veri tutmak için gerekli olan değişken tanımlandı.
     private Object[] rowUserList;
 
@@ -47,7 +52,14 @@ public class OperatorGUI extends JFrame {
         lblWelcome.setText("Hoşgeldiniz: " + operator.getName());
 
         // ModelUserList
-        mdlUserList = new DefaultTableModel();
+        mdlUserList = new DefaultTableModel(){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                if (column == 0) // ID alanının edit edilebilmesini önledik.
+                    return false;
+                return super.isCellEditable(row, column);
+            }
+        };
         Object[] colUserList = {"id", "Ad Soyad", "Kullanici Adi", "Sifre", "Uyelik Tipi"};
         mdlUserList.setColumnIdentifiers(colUserList);
         rowUserList = new Object[colUserList.length];
@@ -59,6 +71,16 @@ public class OperatorGUI extends JFrame {
 
         tblUserList.setModel(mdlUserList);
         tblUserList.getTableHeader().setReorderingAllowed(false);
+
+        // Silmek istediğimiz satıra tıkladığımızda id değerini bulduğumuz kod parçası.
+        tblUserList.getSelectionModel().addListSelectionListener(e -> {
+            try {
+                String selectUserID = tblUserList.getValueAt(tblUserList.getSelectedRow(), 0).toString();
+                fldUserID.setText(selectUserID);
+            } catch (Exception ex) {
+
+            }
+        });
 
         btnUserSubmit.addActionListener(e -> {
             if (Helper.isFieldEmpty(fldName) || Helper.isFieldEmpty(fldUserName) || Helper.isFieldEmpty(fldPassword) || cmbUsetType.getSelectedItem().equals("")) {
@@ -77,6 +99,22 @@ public class OperatorGUI extends JFrame {
                     fldName.setText(null);
                     fldPassword.setText(null);
                     cmbUsetType.setSelectedItem(null);
+                }
+            }
+        });
+        btnDeleteUser.addActionListener(e -> {
+            if (Helper.isFieldEmpty(fldUserID)) {
+                Helper.showMessage("error");
+            }
+            else {
+                int userID = Integer.parseInt(fldUserID.getText());
+                if (User.deleteUser(userID)) {
+                    Helper.showMessage("done");
+                    loadUserModel();
+                    fldUserID.setText(null);
+                }
+                else {
+                    Helper.showMessage("error");
                 }
             }
         });
