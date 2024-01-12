@@ -1,5 +1,6 @@
 package com.patikadev.Model;
 
+import Collections.Student;
 import com.patikadev.Helper.DBConnector;
 import com.patikadev.Helper.Helper;
 
@@ -157,7 +158,7 @@ public class User {
 
         User findUser = User.getFetch(username);
         if (findUser != null && findUser.getId() != userID) {
-            Helper.showMessage("Bu kullanıcı adı daha önceden eklenmiş. Lütfen farklı bir kullanıcı adı giriniz.");
+            Helper.showMessage("Bu kullanıcı adı daha önceden eklenmiş. Lütfen farklı bir kullanıcı adı giriniz!");
         } else {
             try {
                 PreparedStatement preparedStatement = DBConnector.getInstance().prepareStatement(sql);
@@ -177,5 +178,38 @@ public class User {
                 throw new RuntimeException(e);
             }
         }
+    }
+
+    public static ArrayList<User> searchUserList(String query) {
+        ArrayList<User> userList = new ArrayList<>();
+        User obj;
+        try {
+            Statement statement = DBConnector.getInstance().createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            while (resultSet.next()) {
+                obj = new User();
+                obj.setId(resultSet.getInt("id"));
+                obj.setName(resultSet.getString("name"));
+                obj.setUsername(resultSet.getString("username"));
+                obj.setPassword(resultSet.getString("password"));
+                obj.setUserType(resultSet.getString("userType"));
+                userList.add(obj);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return userList;
+    }
+
+    public static String searchQuery(String name, String username, String userType) {
+        String sqlQuery = "SELECT * FROM users WHERE username ILIKE '{{username}}%' AND name ILIKE '{{name}}%'";
+        sqlQuery = sqlQuery.replace("{{username}}", username);
+        sqlQuery = sqlQuery.replace("{{name}}", name);
+        if (!userType.isEmpty()) {
+            sqlQuery += " AND \"userType\" = '{{userType}}'";
+            sqlQuery = sqlQuery.replace("{{userType}}", userType);
+        }
+        return sqlQuery;
     }
 }

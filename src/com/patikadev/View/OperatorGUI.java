@@ -7,10 +7,10 @@ import com.patikadev.Model.User;
 
 import javax.swing.*;
 import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class OperatorGUI extends JFrame {
     private JPanel wrapper;
@@ -35,9 +35,15 @@ public class OperatorGUI extends JFrame {
     private JLabel lblUserID;
     private JTextField fldUserID;
     private JButton btnDeleteUser;
+    private JTextField fldsearchUser;
+    private JLabel lblsearchUser;
+    private JTextField fldSearchNameSurname;
+    private JLabel lblNameSurname;
+    private JLabel lblUserType;
+    private JComboBox cmbSearchUserType;
+    private JButton btnFilter;
     private DefaultTableModel mdlUserList;  // Tabloda veri tutmak için gerekli olan değişken tanımlandı.
     private Object[] rowUserList;
-
     private final Operator operator;
     public OperatorGUI(Operator operator) {
         this.operator = operator;
@@ -94,9 +100,15 @@ public class OperatorGUI extends JFrame {
 
                 User.updateUser(userID, name, userName, password, userType);
                 loadUserModel();
+                fldUserID.setText(null);
+                fldUserName.setText(null);
+                fldName.setText(null);
+                fldPassword.setText(null);
+                cmbUsetType.setSelectedItem(null);
             }
         });
 
+        // Ekleme işlemi
         btnUserSubmit.addActionListener(e -> {
             if (Helper.isFieldEmpty(fldName) || Helper.isFieldEmpty(fldUserName) || Helper.isFieldEmpty(fldPassword) || cmbUsetType.getSelectedItem().equals("")) {
                 Helper.showMessage("fill");
@@ -117,6 +129,8 @@ public class OperatorGUI extends JFrame {
                 }
             }
         });
+
+        // Silme işlemi
         btnDeleteUser.addActionListener(e -> {
             if (Helper.isFieldEmpty(fldUserID)) {
                 Helper.showMessage("error");
@@ -133,13 +147,44 @@ public class OperatorGUI extends JFrame {
                 }
             }
         });
+
+        // Filtreleme işlemi
+        btnFilter.addActionListener(e -> {
+            String name = fldSearchNameSurname.getText();
+            String username = fldsearchUser.getText();
+            String userType = cmbSearchUserType.getSelectedItem().toString();
+
+            String query = User.searchQuery(name, username, userType);
+            ArrayList<User> searchingUser = User.searchUserList(query);
+            loadUserModel(searchingUser);
+        });
+        btnLogout.addActionListener(e -> {
+            dispose();
+        });
     }
 
+    // Tablo anlık güncelleme işlemi
     public void loadUserModel() {
         DefaultTableModel clearModel = (DefaultTableModel) tblUserList.getModel();
         clearModel.setRowCount(0);
 
         for (User obj : User.getList()) {
+            int i = 0;
+            rowUserList[i++] = obj.getId();
+            rowUserList[i++] = obj.getName();
+            rowUserList[i++] = obj.getUsername();
+            rowUserList[i++] = obj.getPassword();
+            rowUserList[i++] = obj.getUserType();
+
+            mdlUserList.addRow(rowUserList);
+        }
+    }
+
+    public void loadUserModel(ArrayList<User> arrayList) {
+        DefaultTableModel clearModel = (DefaultTableModel) tblUserList.getModel();
+        clearModel.setRowCount(0);
+
+        for (User obj : arrayList) {
             int i = 0;
             rowUserList[i++] = obj.getId();
             rowUserList[i++] = obj.getName();
