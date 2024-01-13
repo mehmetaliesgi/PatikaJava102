@@ -3,13 +3,14 @@ package com.patikadev.View;
 import com.patikadev.Helper.Config;
 import com.patikadev.Helper.Helper;
 import com.patikadev.Model.Operator;
+import com.patikadev.Model.Patika;
 import com.patikadev.Model.User;
 
 import javax.swing.*;
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.DefaultTableModel;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.*;
+import java.awt.event.*;
 import java.util.ArrayList;
 
 public class OperatorGUI extends JFrame {
@@ -42,9 +43,19 @@ public class OperatorGUI extends JFrame {
     private JLabel lblUserType;
     private JComboBox cmbSearchUserType;
     private JButton btnFilter;
+    private JPanel pnlPatikaList;
+    private JScrollPane scrlPatika;
+    private JTable tblPatikaList;
+    private JLabel lblPatikaName;
+    private JTextField fldPatikaName;
+    private JButton btnAddPatika;
     private DefaultTableModel mdlUserList;  // Tabloda veri tutmak için gerekli olan değişken tanımlandı.
     private Object[] rowUserList;
     private final Operator operator;
+    private DefaultTableModel mdlPatikaList;
+    private Object[] rowPatikaList;
+    private JPopupMenu patikaMenu;
+
     public OperatorGUI(Operator operator) {
         this.operator = operator;
 
@@ -108,6 +119,56 @@ public class OperatorGUI extends JFrame {
             }
         });
 
+        patikaMenu = new JPopupMenu();
+        JMenuItem updateMenu = new JMenuItem("Güncelle");
+        JMenuItem deleteMenu = new JMenuItem("Sil");
+        patikaMenu.add(updateMenu);
+        patikaMenu.add(deleteMenu);
+
+        updateMenu.addActionListener(e -> {
+            int selectedID = Integer.parseInt(tblPatikaList.getValueAt(tblPatikaList.getSelectedRow(), 0).toString());
+            UpdatePatikaGUI updatePatikaGUI = new UpdatePatikaGUI(Patika.getFetch(selectedID));
+            updatePatikaGUI.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    loadPatikaModel();
+                }
+            });
+        });
+
+        deleteMenu.addActionListener(e -> {
+            if (Helper.confirm("sure")) {
+                int selectedID = Integer.parseInt(tblPatikaList.getValueAt(tblPatikaList.getSelectedRow(), 0).toString());
+                if (Patika.deletePatika(selectedID)) {
+                    Helper.showMessage("done");
+                    loadPatikaModel();
+                }
+                else {
+                    Helper.showMessage("error");
+                }
+            }
+        });
+
+        mdlPatikaList = new DefaultTableModel();
+        Object[] colPatikaList = {"ID", "Patika Adı"};
+        mdlPatikaList.setColumnIdentifiers(colPatikaList);
+        rowPatikaList = new Object[colPatikaList.length];
+        loadPatikaModel();
+
+        tblPatikaList.setModel(mdlPatikaList);
+        tblPatikaList.setComponentPopupMenu(patikaMenu);
+        tblPatikaList.getTableHeader().setReorderingAllowed(false);
+        tblPatikaList.getColumnModel().getColumn(0).setMaxWidth(75);
+
+        tblPatikaList.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                Point point = e.getPoint();
+                int selectedRow = tblPatikaList.rowAtPoint(point);
+                tblPatikaList.setRowSelectionInterval(selectedRow, selectedRow);
+            }
+        });
+
         // Ekleme işlemi
         btnUserSubmit.addActionListener(e -> {
             if (Helper.isFieldEmpty(fldName) || Helper.isFieldEmpty(fldUserName) || Helper.isFieldEmpty(fldPassword) || cmbUsetType.getSelectedItem().equals("")) {
@@ -136,14 +197,16 @@ public class OperatorGUI extends JFrame {
                 Helper.showMessage("error");
             }
             else {
-                int userID = Integer.parseInt(fldUserID.getText());
-                if (User.deleteUser(userID)) {
-                    Helper.showMessage("done");
-                    loadUserModel();
-                    fldUserID.setText(null);
-                }
-                else {
-                    Helper.showMessage("error");
+                if (Helper.confirm("sure")) {
+                    int userID = Integer.parseInt(fldUserID.getText());
+                    if (User.deleteUser(userID)) {
+                        Helper.showMessage("done");
+                        loadUserModel();
+                        fldUserID.setText(null);
+                    }
+                    else {
+                        Helper.showMessage("error");
+                    }
                 }
             }
         });
@@ -161,15 +224,30 @@ public class OperatorGUI extends JFrame {
         btnLogout.addActionListener(e -> {
             dispose();
         });
+        btnAddPatika.addActionListener(e -> {
+            if (Helper.isFieldEmpty(fldPatikaName)) {
+                Helper.showMessage("fill");
+            }
+            else {
+                if (Patika.addPatika(fldPatikaName.getText().toString())) {
+                    Helper.showMessage("done");
+                    loadPatikaModel();
+                    fldPatikaName.setText(null);
+                }
+                else {
+                    Helper.showMessage("error");
+                }
+            }
+        });
     }
 
     // Tablo anlık güncelleme işlemi
     public void loadUserModel() {
         DefaultTableModel clearModel = (DefaultTableModel) tblUserList.getModel();
         clearModel.setRowCount(0);
-
+            int i;
         for (User obj : User.getList()) {
-            int i = 0;
+            i = 0;
             rowUserList[i++] = obj.getId();
             rowUserList[i++] = obj.getName();
             rowUserList[i++] = obj.getUsername();
@@ -177,6 +255,20 @@ public class OperatorGUI extends JFrame {
             rowUserList[i++] = obj.getUserType();
 
             mdlUserList.addRow(rowUserList);
+        }
+    }
+
+    public void loadPatikaModel() {
+        DefaultTableModel clearModel = (DefaultTableModel) tblPatikaList.getModel();
+        clearModel.setRowCount(0);
+
+        int i;
+        for (Patika obj : Patika.getListPatika()) {
+            i = 0;
+            rowPatikaList[i++] = obj.getId();
+            rowPatikaList[i++] = obj.getName();
+
+            mdlPatikaList.addRow(rowPatikaList);
         }
     }
 
