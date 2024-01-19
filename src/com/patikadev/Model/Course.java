@@ -2,6 +2,7 @@ package com.patikadev.Model;
 
 import com.patikadev.Helper.DBConnector;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -48,6 +49,56 @@ public class Course {
             throw new RuntimeException(e);
         }
         return courses;
+    }
+
+    public static boolean add(int user_id, int patika_id, String name, String lang) {
+        String query = "INSERT INTO course (user_id, patika_id, name, lang) VALUES (?, ?, ?, ?)";
+
+        try {
+            PreparedStatement preparedStatement = DBConnector.getInstance().prepareStatement(query);
+            preparedStatement.setInt(1, user_id);
+            preparedStatement.setInt(2, patika_id);
+            preparedStatement.setString(3, name);
+            preparedStatement.setString(4, lang);
+            return preparedStatement.executeUpdate() != -1;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static ArrayList<Course> getListByUser(int userId) {
+        ArrayList<Course> courses = new ArrayList<>();
+        Course obj;
+
+        try {
+            Statement statement = DBConnector.getInstance().createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM course WHERE user_id = " + userId);
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                int user_id = resultSet.getInt("user_id");
+                int patika_id = resultSet.getInt("patika_id");
+                String lang = resultSet.getString("lang");
+
+                obj = new Course(id, name, user_id, patika_id, lang);
+                courses.add(obj);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return courses;
+    }
+
+    public static boolean delete(int id) {
+        String query = "DELETE FROM course WHERE id = ?";
+
+        try {
+            PreparedStatement preparedStatement = DBConnector.getInstance().prepareStatement(query);
+            preparedStatement.setInt(1, id);
+            return preparedStatement.executeUpdate() != -1;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public int getId() {

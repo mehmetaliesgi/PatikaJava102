@@ -129,6 +129,8 @@ public class OperatorGUI extends JFrame {
 
                 User.updateUser(userID, name, userName, password, userType);
                 loadUserModel();
+                loadEducatorCombo();
+                loadCourseModel();
                 fldUserID.setText(null);
                 fldUserName.setText(null);
                 fldName.setText(null);
@@ -166,6 +168,8 @@ public class OperatorGUI extends JFrame {
                 Helper.showMessage("error");
             }
             else {
+                ArrayList<Course> courses = new ArrayList<>();
+
                 if (Helper.confirm("sure")) {
                     int userID = Integer.parseInt(fldUserID.getText());
                     if (User.deleteUser(userID)) {
@@ -173,6 +177,7 @@ public class OperatorGUI extends JFrame {
                         loadUserModel();
                         fldUserID.setText(null);
                         loadEducatorCombo();
+                        loadCourseModel();
                     }
                     else {
                         Helper.showMessage("error");
@@ -206,6 +211,7 @@ public class OperatorGUI extends JFrame {
                 public void windowClosed(WindowEvent e) {
                     loadPatikaModel();
                     loadPatikaCombo();
+                    loadCourseModel();
                 }
             });
         });
@@ -217,6 +223,7 @@ public class OperatorGUI extends JFrame {
                     Helper.showMessage("done");
                     loadPatikaModel();
                     loadPatikaCombo();
+                    loadCourseModel();
                 }
                 else {
                     Helper.showMessage("error");
@@ -266,12 +273,31 @@ public class OperatorGUI extends JFrame {
         Object [] colCourseList = {"ID", "Ders Adi", "Programlama Dili", "Patika", "Eğitmen"};
         mdlCourseList.setColumnIdentifiers(colCourseList);
         rowCourseList = new Object[colCourseList.length];
-        loadCourseList();
+        loadCourseModel();
         tblCourseList.setModel(mdlCourseList);
         tblCourseList.getColumnModel().getColumn(0).setMaxWidth(75);
         tblCourseList.getTableHeader().setReorderingAllowed(false);
         loadPatikaCombo();
         loadEducatorCombo();
+
+        btnAddCourse.addActionListener(e -> {
+            Item patikaItem = (Item) cmbPatikas.getSelectedItem();
+            Item educatorItem = (Item) cmbCourseEducator.getSelectedItem();
+            if (Helper.isFieldEmpty(fldCourseName) || Helper.isFieldEmpty(fldPragramLang))
+            {
+                Helper.showMessage("fill");
+            } else {
+                if (Course.add(educatorItem.getKey(), patikaItem.getKey(), fldCourseName.getText(), fldPragramLang.getText())) {
+                    Helper.showMessage("done");
+                    fldCourseName.setText(null);
+                    fldPragramLang.setText(null);
+                    loadCourseModel();
+                } else {
+                    Helper.showMessage("error");
+                }
+            }
+
+        });
         // ---------- CourseList ----------
 
         btnLogout.addActionListener(e -> {
@@ -284,7 +310,8 @@ public class OperatorGUI extends JFrame {
         String query = "SELECT * FROM users";
         DefaultTableModel clearModel = (DefaultTableModel) tblUserList.getModel();
         clearModel.setRowCount(0);
-            int i;
+
+        int i;
         for (User obj : User.getList(query)) {
             i = 0;
             rowUserList[i++] = obj.getId();
@@ -315,8 +342,9 @@ public class OperatorGUI extends JFrame {
         DefaultTableModel clearModel = (DefaultTableModel) tblUserList.getModel();
         clearModel.setRowCount(0);
 
-        int i = 0;
+        int i;
         for (User obj : arrayList) {
+            i = 0;
             rowUserList[i++] = obj.getId();
             rowUserList[i++] = obj.getName();
             rowUserList[i++] = obj.getUsername();
@@ -326,11 +354,13 @@ public class OperatorGUI extends JFrame {
             mdlUserList.addRow(rowUserList);
         }
     }
-    private void loadCourseList() {
+    private void loadCourseModel() {
         DefaultTableModel clearModel = (DefaultTableModel) tblCourseList.getModel();
         clearModel.setRowCount(0);
-        int i = 0;
+
+        int i;
         for (Course obj : Course.getList()) {
+            i = 0;
             rowCourseList[i++] = obj.getId();
             rowCourseList[i++] = obj.getName();
             rowCourseList[i++] = obj.getLang();
@@ -356,7 +386,6 @@ public class OperatorGUI extends JFrame {
             cmbCourseEducator.addItem(new Item(obj.getId(), obj.getName()));
 
         }
-        System.out.println(query);
     }
 
     public static void main(String[] args) {

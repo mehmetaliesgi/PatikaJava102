@@ -166,15 +166,17 @@ public class User {
     public static boolean deleteUser(int userID) {
         String sql = "DELETE FROM users WHERE id = ?";
 
-        boolean result = false;
         try {
             PreparedStatement preparedStatement = DBConnector.getInstance().prepareStatement(sql);
             preparedStatement.setInt(1, userID);
-            result = preparedStatement.executeUpdate() != -1;
+            ArrayList<Course> courses = Course.getListByUser(userID);
+            for (Course course : courses) {
+                Course.delete(course.getId());
+            }
+            return preparedStatement.executeUpdate() != -1;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return result;
     }
 
     public static void updateUser(int userID, String name, String username, String password, String userType) {
