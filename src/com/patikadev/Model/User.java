@@ -65,13 +65,14 @@ public class User {
         this.userType = userType;
     }
 
-    public static ArrayList<User> getList() {
+    public static ArrayList<User> getList(String query) {
         ArrayList<User> userList = new ArrayList<>();
-        String sqlQuery = "SELECT * FROM users";
+        //String sqlQuery = "SELECT * FROM users";
         User obj;
         try {
             Statement statement = DBConnector.getInstance().createStatement();
-            ResultSet resultSet = statement.executeQuery(sqlQuery);
+            //ResultSet resultSet = statement.executeQuery(sqlQuery);
+            ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
                 obj = new User();
                 obj.setId(resultSet.getInt("id"));

@@ -155,6 +155,7 @@ public class OperatorGUI extends JFrame {
                     fldName.setText(null);
                     fldPassword.setText(null);
                     cmbUsetType.setSelectedItem(null);
+                    loadEducatorCombo();
                 }
             }
         });
@@ -171,6 +172,7 @@ public class OperatorGUI extends JFrame {
                         Helper.showMessage("done");
                         loadUserModel();
                         fldUserID.setText(null);
+                        loadEducatorCombo();
                     }
                     else {
                         Helper.showMessage("error");
@@ -269,6 +271,7 @@ public class OperatorGUI extends JFrame {
         tblCourseList.getColumnModel().getColumn(0).setMaxWidth(75);
         tblCourseList.getTableHeader().setReorderingAllowed(false);
         loadPatikaCombo();
+        loadEducatorCombo();
         // ---------- CourseList ----------
 
         btnLogout.addActionListener(e -> {
@@ -278,10 +281,11 @@ public class OperatorGUI extends JFrame {
 
     // Tablo anlık güncelleme işlemi
     public void loadUserModel() {
+        String query = "SELECT * FROM users";
         DefaultTableModel clearModel = (DefaultTableModel) tblUserList.getModel();
         clearModel.setRowCount(0);
             int i;
-        for (User obj : User.getList()) {
+        for (User obj : User.getList(query)) {
             i = 0;
             rowUserList[i++] = obj.getId();
             rowUserList[i++] = obj.getName();
@@ -343,6 +347,16 @@ public class OperatorGUI extends JFrame {
         for (Patika obj : Patika.getListPatika()) {
             cmbPatikas.addItem(new Item(obj.getId(), obj.getName()));
         }
+    }
+
+    public void loadEducatorCombo() {
+        String query = "SELECT * FROM users WHERE \"userType\" = 'EDUCATOR'";
+        cmbCourseEducator.removeAllItems();
+        for (User obj : User.getList(query)) {
+            cmbCourseEducator.addItem(new Item(obj.getId(), obj.getName()));
+
+        }
+        System.out.println(query);
     }
 
     public static void main(String[] args) {
