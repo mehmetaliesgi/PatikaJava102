@@ -308,6 +308,20 @@ public class OperatorGUI extends JFrame {
             });
         });
 
+        courseDelete.addActionListener(e -> {
+            if (Helper.confirm("sure")) {
+                int selectedID = Integer.parseInt(tblCourseList.getValueAt(tblCourseList.getSelectedRow(), 0).toString());
+                if (Course.delete(selectedID)) {
+                    Helper.showMessage("done");
+                    loadCourseModel();
+                }
+                else {
+                    Helper.showMessage("error");
+                }
+            }
+        });
+
+
         btnAddCourse.addActionListener(e -> {
             Item patikaItem = (Item) cmbPatikas.getSelectedItem();
             Item educatorItem = (Item) cmbCourseEducator.getSelectedItem();
