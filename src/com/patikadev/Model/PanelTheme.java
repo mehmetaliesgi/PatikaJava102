@@ -1,6 +1,7 @@
 package com.patikadev.Model;
 
 import javax.swing.*;
+import java.util.ArrayList;
 
 public class PanelTheme {
     public static void pickTheme(String themeName) {
@@ -29,10 +30,13 @@ public class PanelTheme {
         }
     }
 
-    public static void listTheme() {
+    public static ArrayList<UIManager.LookAndFeelInfo> listTheme() {
+        ArrayList<UIManager.LookAndFeelInfo> themes = new ArrayList<>();
+
         for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-            System.out.println("Tema İsmi: " + info.getName());
+            themes.add(info);
         }
+        return themes;
     }
 }
 

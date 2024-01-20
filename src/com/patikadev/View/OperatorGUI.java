@@ -345,6 +345,17 @@ public class OperatorGUI extends JFrame {
         btnLogout.addActionListener(e -> {
             dispose();
         });
+
+        btnTheme.addActionListener(e -> {
+            TemplateGUI templateGUI = new TemplateGUI();
+
+            templateGUI.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    super.windowClosed(e);
+                }
+            });
+        });
     }
 
     // Tablo anlık güncelleme işlemi
