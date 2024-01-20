@@ -101,6 +101,44 @@ public class Course {
         }
     }
 
+    public static boolean updateCourse(int id, String name, String lang, int patikaId, int educatorId) {
+        String query = "UPDATE course SET name = ?, lang = ?, patika_id = ?, user_id = ? WHERE id = ?";
+
+        try {
+            PreparedStatement preparedStatement = DBConnector.getInstance().prepareStatement(query);
+            preparedStatement.setString(1, name);
+            preparedStatement.setString(2, lang);
+            preparedStatement.setInt(3, patikaId);
+            preparedStatement.setInt(4, educatorId);
+            preparedStatement.setInt(5, id);
+
+            return preparedStatement.executeUpdate() != -1;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static Course getFetch(int id) {
+        String query = "SELECT * FROM course WHERE id = ?";
+        Course obj = null;
+        try {
+            PreparedStatement preparedStatement = DBConnector.getInstance().prepareStatement(query);
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                obj = new Course(resultSet.getInt("id"), resultSet.getString("name"), resultSet.getInt("user_id"),
+                        resultSet.getInt("patika_id"), resultSet.getString("lang"));
+                System.out.println(resultSet.getString("name"));
+                System.out.println(resultSet.getString("lang"));
+                System.out.println(resultSet.getInt("user_id"));
+                System.out.println(resultSet.getInt("patika_id"));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return obj;
+    }
+
     public int getId() {
         return id;
     }

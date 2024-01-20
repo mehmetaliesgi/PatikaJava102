@@ -70,6 +70,7 @@ public class OperatorGUI extends JFrame {
     private DefaultTableModel mdlPatikaList;
     private Object[] rowPatikaList;
     private JPopupMenu patikaMenu;
+    private JPopupMenu coursesMenu;
     private DefaultTableModel mdlCourseList;
     private Object[] rowCourseList;
 
@@ -279,6 +280,33 @@ public class OperatorGUI extends JFrame {
         tblCourseList.getTableHeader().setReorderingAllowed(false);
         loadPatikaCombo();
         loadEducatorCombo();
+
+        coursesMenu = new JPopupMenu();
+        JMenuItem courseUpdate = new JMenuItem("Güncelle");
+        JMenuItem courseDelete = new JMenuItem("Sil");
+        coursesMenu.add(courseUpdate);
+        coursesMenu.add(courseDelete);
+
+        tblCourseList.setComponentPopupMenu(coursesMenu);
+        tblCourseList.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                Point point = e.getPoint();
+                int selectedRow = tblCourseList.rowAtPoint(point);
+                tblCourseList.setRowSelectionInterval(selectedRow, selectedRow);
+            }
+        });
+
+        courseUpdate.addActionListener(e -> {
+            int selectedID = Integer.parseInt(tblCourseList.getValueAt(tblCourseList.getSelectedRow(), 0).toString());
+            UpdateCourseGUI updateCourseGUI = new UpdateCourseGUI(Course.getFetch(selectedID));
+            updateCourseGUI.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    loadCourseModel();
+                }
+            });
+        });
 
         btnAddCourse.addActionListener(e -> {
             Item patikaItem = (Item) cmbPatikas.getSelectedItem();
