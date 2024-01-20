@@ -128,10 +128,6 @@ public class Course {
             if (resultSet.next()) {
                 obj = new Course(resultSet.getInt("id"), resultSet.getString("name"), resultSet.getInt("user_id"),
                         resultSet.getInt("patika_id"), resultSet.getString("lang"));
-                System.out.println(resultSet.getString("name"));
-                System.out.println(resultSet.getString("lang"));
-                System.out.println(resultSet.getInt("user_id"));
-                System.out.println(resultSet.getInt("patika_id"));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
